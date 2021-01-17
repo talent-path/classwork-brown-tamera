@@ -1,7 +1,4 @@
-
-
 import java.util.Random;
-import java.util.Scanner;
 
 public class TicTacToe {
 
@@ -12,10 +9,8 @@ public class TicTacToe {
 
     public static void main(String[] args) {
 
-        //getComputerChoice();
-        //getUserPlacement(b);
-        PlayGame();
 
+        PlayGame();
 
     }
 
@@ -46,113 +41,100 @@ public class TicTacToe {
             }
             System.out.println();
 
+
+
         }
+
 
     }
 
 
 
     public static void Turns(char [][] board) {
-
-    boolean player = true;
     boolean gameEnded=false;
 
-    int row=0;
-    int col=0;
+     boolean player=DecideWhoGoesFirst();
 
     while (!gameEnded) {
         PrintBoard(board);
 
-        // keep track of the symbol
-        char symbol = ' ';
-        if (player) symbol = 'x';
-        else symbol = 'o';
 
         //Print out players turn
-        if (player) System.out.println("User's Turn (x)");
-        else System.out.println("Computer's Turn (o)");
+        if (player) {
+            System.out.println("User's Turn (x)");
+            getPlayerMove(board);
+        } else {
+            System.out.println("Computer's Turn (o)");
+            getComputerMove(board);
+        }
+        player = !player;
+
+        gameEnded=TrackRecord(board);
+
+    }
+
+        DisplayStats();
+
+
+
+        }
+
+
+
+
+    public static void getComputerMove(char[][] board) {
+        char symbol = 'o';
+        int row = 0;
+        int col = 0;
+
+
+
+
+
+        Random rand=new Random();
+        row=rand.nextInt(3);
+        col=rand.nextInt(3);
 
         while (true) {
 
-            //Get Placements
-            if (player) {
-                int rnum = Console.readInt("Enter a a row number (0-2)");
 
-                row = rnum;
-                int cnum = Console.readInt("Enter a col num (0-2)");
-                col = cnum;
 
-                //check if row and col are valid
-                if (row < 0 || col < 0 || row > 2 || col > 2) System.out.println("Row and Cols are out of bounds");
-                else if (board[row][col] != '-') System.out.println("Position already filled");
-                else break;
-
-            }
+             if (board[row][col] != '-'){
+                 rand=new Random();
+                 row=rand.nextInt(3);
+                 col=rand.nextInt(3);
+             }
+            else break;
         }
-
-        board[row][col] = symbol;
-        if (IfWon(board) == 'x') {
-            System.out.println("User Won");
-            userWins++;
-            gameEnded=true;
-        }
-        else if (IfWon(board) == 'o') {
-            System.out.println("Computer Won");
-            computerWins++;
-            gameEnded=true;
-        }
-        else {
-            if (IsFull(board)) {
-                System.out.println("Tie");
-                draws++;
-                gameEnded=true;
-            }
-            else{
-                player=!player;
-                int ccol=0;
-                int crow=0;
-                crow=getComputerChoice();
-                ccol=getComputerChoice2();
-                System.out.println(crow);
-                System.out.println(ccol);
-
-
-            }
-
+        board[row][col]=symbol;
 
         }
 
-    }
-        System.out.println("User: " + userWins);
-        System.out.println("Computer: " + computerWins);
-        System.out.println("Draw: " + draws);
-}
 
-    public static int getComputerChoice() {
-        Random rand=new Random();
 
-        int row = rand.nextInt(3);
-        //int cols=rand.nextInt(3);
-       // System.out.println(row);
-        //System.out.println(cols);
 
-        return  row;
-    }
-    public static int getComputerChoice2() {
-        Random rand=new Random();
+    public static void getPlayerMove(char[][] board) {
+        char symbol='x';
+        int row=0;
+        int col=0;
 
-        //int row = rand.nextInt(3);
-        int cols=rand.nextInt(3);
-        // System.out.println(row);
-        //System.out.println(cols);
+        while (true) {
 
-        return cols;
+            row = Console.readInt("Enter a a row number (0-2)");
+            col = Console.readInt("Enter a col num (0-2)");
+
+            if (row < 0 || col < 0 || row > 2 || col > 2) System.out.println("Row and Cols are out of bounds");
+            else if (board[row][col] != '-') System.out.println("Position already filled");
+            else break;
+        }
+
+   board[row][col]=symbol;
+
     }
 
     public static int GetRounds() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("How many rounds of Tic Tac Toe would you like to play?");
-        int rounds = scanner.nextInt();
+
+        int rounds = Console.readInt("Enter number of rounds",0,10);
 
         return rounds;
     }
@@ -205,6 +187,43 @@ public static boolean IsFull(char[][] board){
         }
         return true;
 }
+public static boolean DecideWhoGoesFirst(){
+    boolean CoinFlipResult= Rng.coinFlip();
 
+
+        return CoinFlipResult;
+    }
+public static void DisplayStats(){
+    System.out.println("User: " + userWins);
+    System.out.println("Computer: " + computerWins);
+    System.out.println("Draw: " + draws);
+
+
+}
+
+public static boolean TrackRecord(char[][] board){
+        boolean end=false;
+
+    if (IfWon(board) == 'x') {
+        System.out.println("User Won");
+        userWins++;
+        PrintBoard(board);
+        end= true;
+    } else if (IfWon(board) == 'o') {
+        System.out.println("Computer Won");
+        computerWins++;
+        PrintBoard(board);
+        end = true;
+    } else {
+        if (IsFull(board)) {
+            System.out.println("Draw");
+            draws++;
+            PrintBoard(board);
+            end = true;
+        }
+
+    }
+    return end;
+}
 }
 
