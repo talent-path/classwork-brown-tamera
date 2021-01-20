@@ -141,11 +141,11 @@ public class TicTacToe {
 
     public static void PlayGame(){
 
-        int NumofRounds=GetRounds();
+        int NumOfRounds=GetRounds();
 
 
         int i=0;
-        while(NumofRounds!=i) {
+        while(NumOfRounds!=i) {
             char [][] b=SetBoard();
             Turns(b);
             i++;
