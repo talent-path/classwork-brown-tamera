@@ -76,8 +76,8 @@ public class Application {
 //            System.out.println( key + ": " + suitCountsH2.get(key) );
 //        }
 
-        List<Card> selected = new ArrayList<>();
-        List<List<Card>> currentSelected = new ArrayList<>();
+        List<Card> selected = new ArrayList<Card>();
+        List<List<Card>> currentSelected = new ArrayList<List<Card>>();
 
         Card[] testhand1Cards = new Card[7];
 

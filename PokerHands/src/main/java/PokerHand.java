@@ -167,7 +167,7 @@ public class PokerHand {
 
     //should return null when there is only one pair
     public FaceValue higherPairValue() {
-        List<FaceValue> c1 = new ArrayList<>();
+        List<FaceValue> c1 = new ArrayList<FaceValue>();
         Map<FaceValue, Integer> face = countFaceValues();
         if (pairValue() == null) return null;
 
@@ -198,7 +198,7 @@ public class PokerHand {
 
         //base cases
         if (currentlySelected.size() == 5) {
-            List<Card> copy = new ArrayList<>();
+            List<Card> copy = new ArrayList<Card>();
             for (Card toCopy : currentlySelected) copy.add(toCopy);
 
             allCombinations.add(copy);
