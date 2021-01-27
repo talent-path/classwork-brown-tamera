@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.tp</groupId>
-	<artifactId>hangman</artifactId>
+	<artifactId>connectfour</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>hangman</name>
-	<description>first real REST controller app</description>
+	<name>connectfour</name>
+	<description>Connect Four CRUD</description>
 	<properties>
 		<java.version>11</java.version>
 	</properties>

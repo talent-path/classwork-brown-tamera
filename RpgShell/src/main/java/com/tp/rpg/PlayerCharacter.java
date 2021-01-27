@@ -11,7 +11,7 @@ public class PlayerCharacter extends Character {
     }
     //use scanner here to get something from the user
 
-
+@Override
     public String makeChoice() {
         Scanner input=new Scanner(System.in);
         String option;

@@ -1,13 +1,13 @@
-package com.tp.hangman;
+package com.tp.connectfour;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class HangmanApplication {
+public class ConnectfourApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(HangmanApplication.class, args);
+		SpringApplication.run(ConnectfourApplication.class, args);
 	}
 
 }

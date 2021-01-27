@@ -71,7 +71,7 @@ public class Application {
 
 
         while( a.isAlive() && b.isAlive() ){
-                //System.out.println(a.getName()+ "'s Turn");
+            System.out.println(a.getName()+ "'s Turn");
             if(a.makeChoice().equals("Attack")){
                 attacker.attack(b);
                 DisplayHPstatus(a,b);

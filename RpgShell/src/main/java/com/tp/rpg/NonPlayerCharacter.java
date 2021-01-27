@@ -2,6 +2,8 @@ package com.tp.rpg;
 
 import com.tp.rpg.weapons.TypesOfWeapons;
 
+import java.util.Scanner;
+
 public abstract class NonPlayerCharacter extends Character {
 
 
@@ -12,9 +14,6 @@ public abstract class NonPlayerCharacter extends Character {
 
 
 
-    public String makeChoice() {
-        return null;
-    }
 
     public int generateDamage() {
         return 0;
