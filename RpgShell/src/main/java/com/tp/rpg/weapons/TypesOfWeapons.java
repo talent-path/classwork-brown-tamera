@@ -4,8 +4,8 @@ import com.tp.rpg.Rng;
 
 public enum TypesOfWeapons {
 
-    GRAVITYGUN(Rng.randInt(0,11)),
-    ENERGYSWORD(Rng.randInt(0,11));
+    GRAVITYGUN(Rng.randInt(10,20)),
+    ENERGYSWORD(Rng.randInt(10,20));
 
 
 

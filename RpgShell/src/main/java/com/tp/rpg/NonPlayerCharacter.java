@@ -10,4 +10,13 @@ public abstract class NonPlayerCharacter extends Character {
     }
 
 
+
+
+    public String makeChoice() {
+        return null;
+    }
+
+    public int generateDamage() {
+        return 0;
+    }
 }

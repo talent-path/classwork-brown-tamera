@@ -15,11 +15,10 @@ public class Application {
 
 
 
-        while(true){
+        while(pc.isAlive()){
             NonPlayerCharacter enemy = setUpEnemy();
 
-            break;
-          //  battle( pc, enemy );
+           battle( pc, enemy );
 
 
         }
@@ -57,7 +56,8 @@ public class Application {
 
     //create some NPC object (with armor & weapons?)
     private static NonPlayerCharacter setUpEnemy() {
-        NonPlayerCharacter em=new Goblin("Goblin",TypesOfWeapons.ENERGYSWORD,100);
+        NonPlayerCharacter em=new Goblin("Goblin", TypesOfWeapons.ENERGYSWORD, 100);
+
         System.out.println(em);
 
         return em;
@@ -65,34 +65,44 @@ public class Application {
 
     //a and b battle until one is dead
     private static void battle(Character a, Character b) {
-        String option;
-        Scanner action=new Scanner(System.in);
-        Console.print("Choose an Action");
-       option=action.next();
+
         Character attacker = a;
         Character defender = b;
 
 
         while( a.isAlive() && b.isAlive() ){
-            switch (option){
-                case "Attack":
-                    attacker.attack(b);
-                    break;
-                case "Block":
-                    attacker.block(b);
-                    break;
-
+                //System.out.println(a.getName()+ "'s Turn");
+            if(a.makeChoice().equals("Attack")){
+                attacker.attack(b);
+                DisplayHPstatus(a,b);
             }
+            else if(a.makeChoice().equals("Block")) {
+                attacker.block(b);
+                DisplayHPstatus(a,b);
+            }
+
 
             Character temp = a;
             a = b;
             b = temp;
 
+            }
+
+
+
             //TODO: display HP status?
+
         }
+
+    private static void DisplayHPstatus(Character a, Character b) {
+        System.out.println(a.getName()+ "  " + a.getHealth());
+        System.out.println(b.getName()+ "  " + b.getHealth());
+
     }
+
 
     //display some message
     private static void gameOverScreen() {
+        System.out.println("Game Over........");
     }
 }
