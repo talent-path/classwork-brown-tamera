@@ -1,77 +1,60 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class App {
 
     public static void main(String[] args) {
 
-    char [][] Sudku= {{
-            {'5',"3",".",".","7",".",".",".","."},
-            {"6",".",".","1","9","5",".",".","."},
-            {".","9","8",".",".",".",".","6","."},
-            {"8",".",".",".","6",".",".",".","3"},
-            {"4",".",".","8",".","3",".",".","1"},
-            {"7",".",".",".","2",".",".",".","6"},
-            {".","6",".",".",".",".","2","8","."},
-            {".",".",".","4","1","9",".",".","5"},
-            {".",".",".",".","8",".",".","7","9"}}};
-        System.out.println(isValidSudoku(Sudku);
+
 
     }
+
     public static boolean isValidSudoku(char[][] board) {
-        List<Character> row=new ArrayList<>();
-        List<Character> col=new ArrayList<>();
-        List<Character> box=new ArrayList<>();
 
-        boolean isValid=true;
+        // init data
+        HashSet<Integer> [] rows = new HashSet[9];
+        HashSet<Integer> [] columns = new HashSet[9];
+        HashSet<Integer> [] boxes = new HashSet[9];
+        for (int i = 0; i < 9; i++) {
+            rows[i] = new HashSet<Integer>();
+            columns[i] = new HashSet<Integer>();
+            boxes[i] = new HashSet<Integer>();
+        }
 
-        //check cols
-        for(int i=0;i< 9;i++) {
+        // validate a board
+        for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
-                if (col.contains(board[i][j])) {
-                    isValid=false;
-                }
-                if (board[i][j]!='.') {
-                    col.add(board[i][j]);
-                    isValid=true;
-                }
-            }
-        }
+                char num = board[i][j];
+                if (num != '.') {
+                    int n = (int)num;
+                    int box_index = (i / 3 ) * 3 + j / 3;
 
-        //check rows
+                    if((!rows[i].add(n))
+                            ||
+                            (!columns[j].add(n))
+                            ||
+                            (!boxes[box_index].add(n))){
+                        return false;
+                    }
 
-        for(int i=0;i< 9;i++){
-            for(int j =0;j<9;j++) {
-
-                if (row.contains(board[i][j])) {
-                    isValid= false;
-                }
-                if (board[i][j]!='.') {
-                    row.add(board[i][j]);
-                    isValid=true;
-                }
-            }}
-
-
-        // check 3*3 boxes
-        for(int i=3;i<9;i+=3){
-            for(int j=3;j<9;j+=3){
-
-
-                if (box.contains(board[i][j])) {
-                    isValid=false;
-                }
-                if (board[i][j]!='.') {
-                    box.add(board[i][j]);
-                    isValid=true;
                 }
             }
         }
 
-
-
-
-
-        return isValid;
+        return true;
     }
-}
+    public void solveSudoku(char[][] board) {
+            int [] possibleNums= {1,2,3,4,5,6,7,8,9};
+        for(int i=0;i<9; i++){
+            for(int j=0;j<9;j++){
+                if(board[i][j]=='.'){
+                    board[i][j]=(char)possibleNums[i];
+                }
+            }
+        }
+        if(isValidSudoku(board)){
+
+            solveSudoku(board);
+        }
+    }
+    }
+
