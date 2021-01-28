@@ -1,6 +1,6 @@
 package com.tp.connectfour.service;
 
-import com.tp.connectfour.DAO.ConnectFourinMemDAO;
+import com.tp.connectfour.persistence.ConnectFourinMemDAO;
 import com.tp.connectfour.exceptions.ColunmOutOfBoundsException;
 import com.tp.connectfour.exceptions.InvalidGameIdException;
 import com.tp.connectfour.model.ConnectFourBoard;

@@ -1,4 +1,4 @@
-package com.tp.connectfour.DAO;
+package com.tp.connectfour.persistence;
 
 import com.tp.connectfour.exceptions.ColunmOutOfBoundsException;
 import com.tp.connectfour.exceptions.InvalidGameIdException;
@@ -9,10 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class ConnectFourinMemDAO {
+public class ConnectFourinMemDAO implements ConnectFourDAO{
     List<ConnectFourBoard> allGames=new ArrayList<>();
     Integer id=0;
 
+@Override
     public ConnectFourBoard getGameById(Integer gameId) throws InvalidGameIdException {
 
         for (ConnectFourBoard board : allGames) {
@@ -23,12 +24,12 @@ public class ConnectFourinMemDAO {
         }
         throw new InvalidGameIdException("No Game with " + gameId);
     }
-
+@Override
     public List<ConnectFourBoard> getAllGames() {
 
         return allGames;
     }
-
+@Override
     public void deleteGame(Integer gameId) throws InvalidGameIdException {
         for(int i=0; i<allGames.size();i++){
             if(allGames.get(i).getGameId().equals(gameId)){
@@ -38,7 +39,7 @@ public class ConnectFourinMemDAO {
         }
         throw new InvalidGameIdException("Cannot delete Game with id "+ gameId);
     }
-
+@Override
     public ConnectFourBoard startGame() {
 
 
@@ -46,7 +47,7 @@ public class ConnectFourinMemDAO {
         allGames.add(board);
         return board;
     }
-
+@Override
       public ConnectFourBoard makeMove(ConnectFourBoard board,Integer col) throws ColunmOutOfBoundsException {
 
         if(col>6|| col <0){
