@@ -1,10 +1,15 @@
+import java.text.SimpleDateFormat;
+import java.time.Year;
 import java.util.*;
 
 public class App {
 
     public static void main(String[] args) {
 
-
+        //Date year=;
+        Calendar calendar= Calendar.getInstance();
+        calendar.setTime(new Date());
+        System.out.println(calendar.get(Calendar.YEAR));
 
     }
 
