@@ -19,7 +19,7 @@ public class LibraryService {
         return dao.getAllBooks();
     }
 
-    public LibraryBook getBookById(Integer bookId) throws  NullBookIdException {
+    public LibraryBook getBookById(Integer bookId) throws  NullBookIdException,InvalidBookIdException {
         return dao.getBookById(bookId);
     }
 

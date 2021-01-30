@@ -23,22 +23,19 @@ public class LibraryInMemDAO implements LibraryDAO{
     }
 
     @Override
-    public LibraryBook getBookById(Integer bookId) throws NullBookIdException {
+    public LibraryBook getBookById(Integer bookId) throws NullBookIdException, InvalidBookIdException {
 
-        LibraryBook toReturn=null;
+
         if(bookId==null){
             throw new NullBookIdException("Book id cannot be null");
         }
 
         for (LibraryBook book : allBooks) {
             if (book.getBookId().equals(bookId)) {
-                toReturn=new LibraryBook(book);
-                break;
-                //return book;
+                return book;
             }
         }
-       //throw new InvalidBookIdException("No Book in inventor with " + bookId);
-        return toReturn;
+       throw new InvalidBookIdException("No Book in inventor with " + bookId);
     }
 
     @Override
@@ -66,7 +63,7 @@ public class LibraryInMemDAO implements LibraryDAO{
         List<LibraryBook> copy=new ArrayList<>();
         for(LibraryBook copies : allBooks){
             if(copies.getTitle().toLowerCase().contains(Author.toLowerCase())){
-                copy.add(copies);
+                copy.add(new LibraryBook(copies));
             }
         }
 

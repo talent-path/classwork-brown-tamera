@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface LibraryDAO {
     List<LibraryBook> getAllBooks();
-    LibraryBook getBookById(Integer bookId) throws  NullBookIdException;
+    LibraryBook getBookById(Integer bookId) throws NullBookIdException, InvalidBookIdException;
 
     List<LibraryBook> getBookByTitle(String Title) throws NullTitleException;
 

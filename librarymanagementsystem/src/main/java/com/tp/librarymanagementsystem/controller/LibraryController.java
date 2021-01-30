@@ -20,20 +20,20 @@ public class LibraryController {
         return service.getAllBooks();
     }
     @GetMapping("/books/{bookId}")
-    public LibraryBook getBookById(@PathVariable Integer bookId) throws  NullBookIdException {
+    public LibraryBook getBookById(@PathVariable Integer bookId) throws  NullBookIdException,InvalidBookIdException {
         return service.getBookById(bookId);
 
     }
-    @GetMapping("/books/{Title}")
+    @GetMapping("/books/title/{Title}")
     public List<LibraryBook> getBookByTitle(@PathVariable String Title) throws NullTitleException {
         return service.getBookByTitle(Title);
     }
-    @GetMapping("/books/{Author}")
+    @GetMapping("/books/author/{Author}")
     public List<LibraryBook> getBookByAuthor(@PathVariable String Author) throws NullAuthorException {
         return service.getBookByAuthor(Author);
     }
 
-    @GetMapping("books/{Year}")
+    @GetMapping("books/year/{Year}")
     public List<LibraryBook> getBookByYear(@PathVariable int Year) throws InvalidYearException {
         return service.getBookByYear(Year);
     }
