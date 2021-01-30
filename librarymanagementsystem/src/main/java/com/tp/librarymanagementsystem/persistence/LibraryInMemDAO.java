@@ -5,6 +5,7 @@ import com.tp.librarymanagementsystem.model.LibraryBook;
 import org.springframework.stereotype.Repository;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Repository
 public class LibraryInMemDAO implements LibraryDAO{
@@ -60,22 +61,23 @@ public class LibraryInMemDAO implements LibraryDAO{
             throw new NullAuthorException("No Book with a null Author(s)");
 
         }
-        List<LibraryBook> copy=new ArrayList<>();
-        for(LibraryBook copies : allBooks){
-            if(copies.getTitle().toLowerCase().contains(Author.toLowerCase())){
-                copy.add(new LibraryBook(copies));
-            }
-        }
 
-        return copy;
+        return allBooks.stream().filter(book -> book.getAuthor().stream()
+                .anyMatch(Author::equalsIgnoreCase)).collect(Collectors.toList());
+
 
     }
 
     @Override
     public List<LibraryBook> getBookByYear(int Year) throws InvalidYearException {
-
+    Calendar calendar=Calendar.getInstance();
+    calendar.setTime(new Date());
+    int year=calendar.get(Calendar.YEAR);
         if(Year==0){
             throw new InvalidYearException("No book with 0 year");
+        }
+        if(Year>year){
+            throw new InvalidYearException("Cannot get book with future year");
         }
         List<LibraryBook> copy=new ArrayList<>();
         for(LibraryBook copies : allBooks){

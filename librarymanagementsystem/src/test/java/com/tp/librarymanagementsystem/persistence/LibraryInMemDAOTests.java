@@ -35,34 +35,35 @@ public class LibraryInMemDAOTests {
     }
 
     @Test
-    public void getBookGoldenPathTest(){
+    public void getBookGoldenPathTest() {
         try {
-            LibraryBook test=toTest.getBookById(0);
-           // System.out.println(test.getTitle());
+            LibraryBook test = toTest.getBookById(0);
+            // System.out.println(test.getTitle());
             assertTrue(test.getTitle().equals("A Promised Land"));
-            assertEquals(0,test.getBookId());
-            assertEquals(2020,test.getYear());
-            assertEquals(1,test.getAuthor().size());
+            assertEquals(0, test.getBookId());
+            assertEquals(2020, test.getYear());
+            assertEquals(1, test.getAuthor().size());
 
-        } catch (NullBookIdException e) {
+        } catch (InvalidBookIdException | NullBookIdException e) {
             fail();
-        } catch (InvalidBookIdException e) {
-            e.printStackTrace();
         }
 
     }
 
     @Test
-    public void getBookByTitleGlodenPath(){
+    public void addBookGoldenPathTest() {
+        try {
+            List<String> authors = new ArrayList<>();
+            authors.add("libi Zoboi");
+            authors.add("Yusef Salaam");
 
-            try {
-                //LibraryBook test=toTest.getBookById(0);
-                assertEquals(0,toTest.getBookByTitle("A Promised Land"));
-            } catch (NullTitleException e) {
-                fail();
-            }
+            LibraryBook test = new LibraryBook(2, "Punching the Air", authors, 2020);
+            toTest.addBook(test);
+            assertEquals("Punching the Air", toTest.getBookById(2).getTitle());
+        } catch (InvalidBookIdException | NullBookIdException | InvalidAuthorException | InvalidYearException | NullTitleException e) {
+            fail();
 
-
+        }
 
 
     }
