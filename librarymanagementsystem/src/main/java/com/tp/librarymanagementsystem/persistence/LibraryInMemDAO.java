@@ -40,7 +40,7 @@ public class LibraryInMemDAO implements LibraryDAO{
     }
 
     @Override
-    public List<LibraryBook> getBookByTitle(String Title) throws NullTitleException {
+    public List<LibraryBook> getBookByTitle(String Title) throws NullTitleException, InvalidTitleException {
         if(Title==null){
             throw new NullTitleException("No Book with a null Title");
 
@@ -48,7 +48,7 @@ public class LibraryInMemDAO implements LibraryDAO{
         List<LibraryBook> copy=new ArrayList<>();
         for(LibraryBook copies : allBooks){
             if(copies.getTitle().toLowerCase().contains(Title.toLowerCase())){
-                copy.add(copies);
+                copy.add(new LibraryBook(copies));
             }
         }
 
@@ -69,20 +69,20 @@ public class LibraryInMemDAO implements LibraryDAO{
     }
 
     @Override
-    public List<LibraryBook> getBookByYear(int Year) throws InvalidYearException {
+    public List<LibraryBook> getBookByYear(Integer Year) throws InvalidYearException,NullYearException {
     Calendar calendar=Calendar.getInstance();
     calendar.setTime(new Date());
     int year=calendar.get(Calendar.YEAR);
-        if(Year==0){
-            throw new InvalidYearException("No book with 0 year");
+        if(Year==null){
+            throw new NullYearException("No book with 0 year");
         }
-        if(Year>year){
-            throw new InvalidYearException("Cannot get book with future year");
+        if(Year>year || Year < 1960){
+            throw new InvalidYearException("Cannot get book with future year or older then 1960");
         }
         List<LibraryBook> copy=new ArrayList<>();
         for(LibraryBook copies : allBooks){
-            if(copies.getYear()==Year){
-                copy.add(copies);
+            if(copies.getYear().equals(Year)){
+                copy.add(new LibraryBook(copies));
             }
         }
 
@@ -124,15 +124,28 @@ public class LibraryInMemDAO implements LibraryDAO{
     }
 
     @Override
-    public LibraryBook addBook(LibraryBook Newbook) throws InvalidAuthorException, NullTitleException, InvalidYearException {
+    public LibraryBook addBook(LibraryBook Newbook) throws InvalidAuthorException, NullTitleException, InvalidYearException,InvalidTitleException,NullYearException,NullAuthorException{
+        Calendar calendar=Calendar.getInstance();
+        calendar.setTime(new Date());
+        int year=calendar.get(Calendar.YEAR);
+
         if(Newbook.getAuthor().size()==0){
             throw new InvalidAuthorException("Cannot add book without authors");
         }
-        if(Newbook.getYear()==0){
-            throw new InvalidYearException("Cannot add book without year");
+        if(Newbook.getYear()==null){
+            throw new NullYearException("Cannot add book without year");
         }
         if(Newbook.getTitle()==null){
             throw new NullTitleException("Cannot add book without Title");
+        }
+        if (Newbook.getTitle() == "") {
+            throw new InvalidTitleException("Cannot add book with empty title");
+        }
+        if(Newbook.getAuthor()==null){
+            throw  new NullAuthorException("Cannot add book with null author");
+        }
+        if(Newbook.getYear()>year){
+            throw  new InvalidYearException("Cannot add books with future year");
         }
 
 

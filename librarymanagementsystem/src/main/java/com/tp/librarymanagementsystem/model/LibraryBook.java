@@ -12,9 +12,9 @@ public class LibraryBook {
     private Integer bookId;
     private String Title;
     private List<String> Author;
-    private int Year;
+    private Integer Year;
 
-    public LibraryBook(Integer bookId, String title, List<String> author, int year) {
+    public LibraryBook(Integer bookId, String title, List<String> author, Integer year) {
         this.bookId = bookId;
         this.Title = title;
         this.Author = author;
@@ -23,12 +23,12 @@ public class LibraryBook {
     public LibraryBook (LibraryBook that){
         this.bookId=that.bookId;
         this.Title=that.Title;
-        this.Year=that.Year;
         this.Author= new ArrayList<>();
-
         for( String toCopy : that.Author ){
             this.Author.add( toCopy );
         }
+
+        this.Year=that.Year;
 
     }
 
@@ -56,11 +56,11 @@ public class LibraryBook {
         Author = author;
     }
 
-    public int getYear() {
+    public Integer getYear() {
         return Year;
     }
 
-    public void setYear(int year) {
+    public void setYear(Integer year) {
         Year = year;
     }
 }

@@ -1,4 +1,5 @@
 package com.tp.librarymanagementsystem.service;
+
 import com.tp.librarymanagementsystem.exceptions.*;
 import com.tp.librarymanagementsystem.model.LibraryBook;
 import org.junit.jupiter.api.BeforeEach;
@@ -9,7 +10,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 @SpringBootTest
 public class LibraryServiceTests {
@@ -23,56 +25,21 @@ public class LibraryServiceTests {
             for (LibraryBook toRemove : allBooks) {
                 toTest.DeleteBook(toRemove.getBookId());
             }
+
             List<String> Authors = new ArrayList<>();
             Authors.add("Obama");
             LibraryBook test = new LibraryBook(0, "A Promised Land", Authors, 2020);
             toTest.addBook(test);
-        } catch (InvalidBookIdException | InvalidYearException | InvalidAuthorException | NullTitleException | NullYearException e) {
+        } catch (InvalidBookIdException | InvalidYearException | InvalidAuthorException | NullTitleException | NullYearException | InvalidTitleException | NullAuthorException e) {
             fail();
         }
     }
-
-
-
-    @Test
-    public void getBookByIdNullTest() {
-        try {
-            LibraryBook test = toTest.getBookById(null);
-            fail();
-        } catch (NullBookIdException e) {
-
-        } catch (InvalidBookIdException e) {
-            //do nothing
-        }
-
-    }
-
-    @Test
-    public void getBookByTitleNullTest() {
-        try {
-            List<LibraryBook> test = toTest.getBookByTitle(null);
-            fail();
-        } catch (NullTitleException e) {
-            //do nothing
-        }
-    }
-
-    @Test
-    public void getBookByAuthorNull() {
-        try {
-            List<LibraryBook> test = toTest.getBookByAuthor(null);
-            fail();
-        } catch (NullAuthorException e) {
-            //do nothing
-        }
-    }
-
     @Test
     public void getBookByYearInvalidTest() {
         try {
-            List<LibraryBook> test = toTest.getBookByYear(0);
+            List<LibraryBook> test = toTest.getBookByYear(-1);
             fail();
-        } catch (InvalidYearException e) {
+        } catch (InvalidYearException | NullYearException e) {
             //do nothing
         }
     }
@@ -102,14 +69,54 @@ public class LibraryServiceTests {
     }
 
     @Test
+    public void addBookEmptyTitleTest() {
+        try {
+            List<String> authors = new ArrayList<>();
+            authors.add("Jim");
+            LibraryBook book = new LibraryBook(1, "", authors, 1997);
+            toTest.addBook(book);
+        } catch (InvalidAuthorException | NullTitleException | InvalidYearException | NullYearException e) {
+            fail();
+
+        } catch (InvalidTitleException e) {
+            //do nothing
+        } catch (NullAuthorException e) {
+            e.printStackTrace();
+        }
+
+    }
+    @Test
+    public void addBookEmptyAuthorTest(){
+        try {
+            List<String> authors = new ArrayList<>();
+            authors.add("");
+            authors.add("");
+            authors.add("");
+            LibraryBook book = new LibraryBook(1, "Hunger Games", authors, 1997);
+            toTest.addBook(book);
+        } catch (InvalidAuthorException | NullTitleException | InvalidYearException | NullYearException e) {
+            fail();
+
+        } catch (InvalidTitleException e) {
+            //do nothing
+        } catch (NullAuthorException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    @Test
     public void addBookYearTooBigTest() {
         try {
             List<String> authors = new ArrayList<>();
             authors.add("Octavia Butler");
-            LibraryBook newBook = new LibraryBook(0, "Fledgling", authors, Integer.MAX_VALUE);
+            LibraryBook newBook = new LibraryBook(0, "Fledgling", authors,3000) ;
             toTest.addBook(newBook);
+            System.out.println(toTest.getAllBooks().get(1).getYear());
 
-        } catch (InvalidAuthorException | NullTitleException | NullYearException e) {
+
+
+        } catch (InvalidAuthorException | NullTitleException | NullYearException | InvalidTitleException | NullAuthorException e) {
             fail();
 
         } catch (InvalidYearException e) {
@@ -126,7 +133,7 @@ public class LibraryServiceTests {
             LibraryBook newBook = new LibraryBook(0, "Fledgling", authors, Integer.MIN_VALUE);
             toTest.addBook(newBook);
 
-        } catch (InvalidAuthorException | NullTitleException | NullYearException e) {
+        } catch (InvalidAuthorException | NullTitleException | NullYearException | InvalidTitleException | NullAuthorException e) {
             fail();
 
         } catch (InvalidYearException e) {
@@ -134,48 +141,14 @@ public class LibraryServiceTests {
         }
 
     }
-
     @Test
-    public void addBookInvaildAuthorsTest() {
-        try {
-            List<String> authors = new ArrayList<>();
-
-            LibraryBook book = new LibraryBook(0, "First Book", authors, 2021);
-            toTest.addBook(book);
-
-        } catch (NullTitleException | InvalidYearException | NullYearException e) {
-            fail();
-        } catch (InvalidAuthorException e) {
-            //do nothing
-        }
-    }
-
-    @Test
-    public void addBookInvaildTitleTest() {
-        try {
-            List<String> authors = new ArrayList<>();
-            authors.add("Me");
-            authors.add("John");
-            authors.add("Shannon");
-            LibraryBook book = new LibraryBook(1, "", authors, 1997);
-            toTest.addBook(book);
-        } catch (InvalidAuthorException | NullTitleException | InvalidYearException e) {
-            fail();
-
-        } catch (NullYearException e) {
-            //do nothing
-        }
-
-    }
-
-    @Test
-    public void addBookInvalidId() {
+    public void addBookInvalidIdTest() {
         try {
             List<String> authors = new ArrayList<>();
             authors.add("Jane");
             LibraryBook book = new LibraryBook(-999, "Second Book", authors, 2004);
             toTest.addBook(book);
-        } catch (InvalidAuthorException | NullTitleException | NullYearException e) {
+        } catch (InvalidAuthorException | NullTitleException | NullYearException | InvalidTitleException | NullAuthorException e) {
             e.printStackTrace();
 
         } catch (InvalidYearException e) {
@@ -185,7 +158,7 @@ public class LibraryServiceTests {
     }
 
     @Test
-    public void upadateBookYearTooBig() {
+    public void upadateBookYearTooBigTest() {
         try {
             List<String> authors = new ArrayList<>();
             authors.add("Author 1");
@@ -193,10 +166,12 @@ public class LibraryServiceTests {
 
             LibraryBook UpdatedBook = new LibraryBook(0, "Becoming", authors, 2021);
             toTest.addBook(UpdatedBook);
-            UpdatedBook.setYear(2025);
-            toTest.UpdateBook(0, UpdatedBook);
+            UpdatedBook.setYear(2078);
+            toTest.UpdateBook(9, UpdatedBook);
 
-        } catch (InvalidAuthorException | NullTitleException | NullYearException | NullBookIdException | InvalidBookIdException e) {
+            assertEquals(2078,UpdatedBook.getYear());
+
+        } catch (InvalidAuthorException | NullTitleException | NullYearException | NullBookIdException | InvalidBookIdException | InvalidTitleException | NullAuthorException e) {
             fail();
 
         } catch (InvalidYearException e) {
@@ -210,13 +185,29 @@ public class LibraryServiceTests {
     public void updateBookYearTooSmallTest() {
         try {
             List<String> authors = new ArrayList<>();
-            authors.add("Octavia Butler");
+            authors.add("Mike");
+            List<String> updateauthors=new ArrayList<>();
+            updateauthors.add("");
             LibraryBook UpdatedBook = new LibraryBook(0, "Fledgling", authors, Integer.MIN_VALUE);
             toTest.addBook(UpdatedBook);
-            UpdatedBook.setYear(1990);
-            toTest.UpdateBook(0,UpdatedBook);
+            UpdatedBook.setAuthor(updateauthors);
+            toTest.UpdateBook(4,UpdatedBook);
 
-        } catch (InvalidAuthorException | NullTitleException | NullYearException | NullBookIdException | InvalidBookIdException e) {
+        } catch (InvalidAuthorException | NullTitleException | NullYearException | NullBookIdException | InvalidBookIdException | InvalidTitleException | NullAuthorException e) {
+            fail();
+
+        } catch (InvalidYearException e) {
+            //do nothing
+        }
+        try {
+            List<String> authors = new ArrayList<>();
+            authors.add("Octavia Butler");
+            LibraryBook UpdatedBook = new LibraryBook(0, "Fledgling", authors, -1);
+            toTest.addBook(UpdatedBook);
+            UpdatedBook.setYear(1990);
+            toTest.UpdateBook(3,UpdatedBook);
+
+        } catch (InvalidAuthorException | NullTitleException | NullYearException | NullBookIdException | InvalidBookIdException | InvalidTitleException | NullAuthorException e) {
             fail();
 
         } catch (InvalidYearException e) {
@@ -236,7 +227,7 @@ public class LibraryServiceTests {
             UpdatedBook.setAuthor(updateauthors);
             toTest.UpdateBook(0 ,UpdatedBook);
 
-        } catch (InvalidAuthorException | NullTitleException | NullYearException | NullBookIdException | InvalidBookIdException e) {
+        } catch (InvalidAuthorException | NullTitleException | NullYearException | NullBookIdException | InvalidBookIdException | InvalidTitleException | NullAuthorException e) {
             fail();
 
         } catch (InvalidYearException e) {
@@ -245,25 +236,29 @@ public class LibraryServiceTests {
     }
 
     @Test
-    public void updateBookInvaildTitleTest(){
+    public void updateBookEmptyTitleTest(){
         try {
             List<String> authors = new ArrayList<>();
             authors.add("Mike");
 
-            LibraryBook UpdatedBook = new LibraryBook(0, "Fledgling", authors, 2020);
+            LibraryBook UpdatedBook = new LibraryBook(0, "That's So Raven", authors, 2020);
             toTest.addBook(UpdatedBook);
             UpdatedBook.setTitle("");
-            toTest.UpdateBook(0 ,UpdatedBook);
+            toTest.UpdateBook(5, UpdatedBook);
 
-        } catch (InvalidAuthorException | NullTitleException | NullYearException | NullBookIdException | InvalidBookIdException e) {
+
+            assertEquals("", toTest.getAllBooks().get(0).getTitle());
+
+        } catch (InvalidAuthorException | NullTitleException | NullYearException | NullBookIdException | InvalidBookIdException | InvalidYearException | NullAuthorException e) {
             fail();
 
-        } catch (InvalidYearException e) {
+
+        }catch (InvalidTitleException e){
             //do nothing
         }
     }
     @Test
-    public void updateBookInvalidId(){
+    public void updateBookInvalidIdTest() {
         try {
             List<String> authors = new ArrayList<>();
             authors.add("Mike");
@@ -271,13 +266,14 @@ public class LibraryServiceTests {
             LibraryBook UpdatedBook = new LibraryBook(0, "Fledgling", authors, 2020);
             toTest.addBook(UpdatedBook);
             UpdatedBook.setBookId(-1);
-            toTest.UpdateBook(0 ,UpdatedBook);
+            toTest.UpdateBook(0, UpdatedBook);
 
-        } catch (InvalidAuthorException | NullTitleException | NullYearException | NullBookIdException | InvalidBookIdException e) {
+        } catch (InvalidAuthorException | NullTitleException | NullYearException | NullBookIdException | InvalidBookIdException | InvalidTitleException | NullAuthorException e) {
             fail();
 
         } catch (InvalidYearException e) {
             //do nothing
+
         }
     }
 }

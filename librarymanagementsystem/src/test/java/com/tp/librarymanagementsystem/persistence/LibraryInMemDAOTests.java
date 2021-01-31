@@ -25,11 +25,14 @@ public class LibraryInMemDAOTests {
             for (LibraryBook toRemove : allBooks) {
                 toTest.DeleteBook(toRemove.getBookId());
             }
+
             List<String> Authors = new ArrayList<>();
             Authors.add("Obama");
             LibraryBook test = new LibraryBook(0, "A Promised Land", Authors, 2020);
             toTest.addBook(test);
-        } catch (InvalidBookIdException | InvalidYearException | InvalidAuthorException | NullTitleException e) {
+            LibraryBook test2= new LibraryBook(1,"Becoming",Authors,2019);
+            toTest.addBook(test2);
+        } catch (InvalidBookIdException | InvalidYearException | InvalidAuthorException | NullTitleException | InvalidTitleException | NullYearException | NullAuthorException e) {
             fail();
         }
     }
@@ -38,7 +41,6 @@ public class LibraryInMemDAOTests {
     public void getBookGoldenPathTest() {
         try {
             LibraryBook test = toTest.getBookById(0);
-            // System.out.println(test.getTitle());
             assertTrue(test.getTitle().equals("A Promised Land"));
             assertEquals(0, test.getBookId());
             assertEquals(2020, test.getYear());
@@ -57,14 +59,95 @@ public class LibraryInMemDAOTests {
             authors.add("libi Zoboi");
             authors.add("Yusef Salaam");
 
-            LibraryBook test = new LibraryBook(2, "Punching the Air", authors, 2020);
+            LibraryBook test = new LibraryBook(1, "Punching the Air", authors, 2020);
             toTest.addBook(test);
-            assertEquals("Punching the Air", toTest.getBookById(2).getTitle());
-        } catch (InvalidBookIdException | NullBookIdException | InvalidAuthorException | InvalidYearException | NullTitleException e) {
+
+            assertEquals("Punching the Air", toTest.getAllBooks().get(3).getTitle());
+        } catch (InvalidAuthorException | InvalidYearException | NullTitleException | InvalidTitleException | NullYearException | NullAuthorException e) {
             fail();
 
         }
 
 
     }
+    @Test
+    public void addBookNullTitleTest(){
+        try {
+            List<String> authors = new ArrayList<>();
+            authors.add("Me");
+            authors.add("John");
+            authors.add("Shannon");
+            LibraryBook book = new LibraryBook(0, null, authors, 1997);
+            toTest.addBook(book);
+        } catch (InvalidAuthorException | InvalidTitleException | InvalidYearException | NullYearException | NullAuthorException e) {
+            fail();
+
+        } catch (NullTitleException e) {
+            //do nothing
+        }
+    }
+    @Test
+    public void addBookNullAuthorsTest() {
+        try {
+            LibraryBook book = new LibraryBook(0, "First Book", null, 2021);
+            toTest.addBook(book);
+
+        } catch (NullTitleException | InvalidYearException | NullYearException | InvalidTitleException e) {
+            fail();
+        } catch (NullAuthorException | InvalidAuthorException |NullPointerException e) {
+            //do nothing
+        }
+    }
+    @Test
+    public void addBookNullYearTest(){
+        List<String> authors=new ArrayList<>();
+        authors.add("Tyler Perry");
+        authors.add("Tamera");
+        try {
+            LibraryBook book = new LibraryBook(0, "First Book", authors, null);
+            toTest.addBook(book);
+
+        } catch (NullTitleException | InvalidYearException | NullAuthorException | InvalidTitleException | InvalidAuthorException e) {
+            fail();
+        } catch (NullYearException e) {
+            //do nothing
+        }
+    }
+    @Test
+    public void DeleteBookGoldenPath() throws InvalidBookIdException {
+        toTest.DeleteBook(1);
+    }
+    @Test
+    public void getBookByIdNullTest() {
+        try {
+            LibraryBook test = toTest.getBookById(null);
+            fail();
+        } catch (NullBookIdException e) {
+
+        } catch (InvalidBookIdException e) {
+            //do nothing
+        }
+
+    }
+    @Test
+    public void getBookByTitleNullTest() {
+        try {
+            List<LibraryBook> test = toTest.getBookByTitle(null);
+            fail();
+        } catch (NullTitleException | InvalidTitleException e) {
+            //do nothing
+        }
+    }
+    @Test
+    public void getBookByAuthorNullTest() {
+        try {
+            List<LibraryBook> test = toTest.getBookByAuthor(null);
+            fail();
+        } catch (NullAuthorException e) {
+            //do nothing
+        }
+    }
+
+
+
 }

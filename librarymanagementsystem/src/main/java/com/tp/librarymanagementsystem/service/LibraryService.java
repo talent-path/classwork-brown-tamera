@@ -23,7 +23,7 @@ public class LibraryService {
         return dao.getBookById(bookId);
     }
 
-    public List<LibraryBook> getBookByTitle(String title) throws NullTitleException {
+    public List<LibraryBook> getBookByTitle(String title) throws NullTitleException, InvalidTitleException{
         return dao.getBookByTitle(title);
     }
 
@@ -31,7 +31,7 @@ public class LibraryService {
         return dao.getBookByAuthor(author);
     }
 
-    public List<LibraryBook> getBookByYear(int year) throws InvalidYearException {
+    public List<LibraryBook> getBookByYear(Integer year) throws InvalidYearException,NullYearException {
         return dao.getBookByYear(year);
     }
 
@@ -43,7 +43,7 @@ public class LibraryService {
         dao.DeleteBook(bookId);
     }
 
-    public LibraryBook addBook(LibraryBook book) throws InvalidAuthorException, NullTitleException, InvalidYearException, NullYearException {
+    public LibraryBook addBook(LibraryBook book) throws InvalidAuthorException, NullTitleException, InvalidYearException, NullYearException, InvalidTitleException, NullAuthorException {
         return dao.addBook(book);
     }
 }
