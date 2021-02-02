@@ -1,7 +1,7 @@
 package com.tp.librarymanagementsystem.persistence;
 
 import com.tp.librarymanagementsystem.exceptions.*;
-import com.tp.librarymanagementsystem.model.LibraryBook;
+import com.tp.librarymanagementsystem.model.Book;
 import org.springframework.stereotype.Repository;
 
 import java.util.*;
@@ -10,45 +10,45 @@ import java.util.stream.Collectors;
 @Repository
 public class LibraryInMemDAO implements LibraryDAO{
 
-    private List<LibraryBook> allBooks = new ArrayList<>();
-    Integer id=0;
+    private List<Book> allBooks = new ArrayList<>();
+
 
     @Override
-    public List<LibraryBook> getAllBooks() {
+    public List<Book> getAllBooks() {
 
-        List<LibraryBook> copy= new ArrayList<>();
-        for(LibraryBook copies : allBooks){
-            copy.add(new LibraryBook(copies));
+        List<Book> copy= new ArrayList<>();
+        for(Book copies : allBooks){
+            copy.add(new Book(copies));
         }
         return allBooks;
     }
 
     @Override
-    public LibraryBook getBookById(Integer bookId) throws NullBookIdException, InvalidBookIdException {
+    public Book getBookById(Integer bookId) throws NullBookIdException, InvalidBookIdException {
 
 
         if(bookId==null){
             throw new NullBookIdException("Book id cannot be null");
         }
 
-        for (LibraryBook book : allBooks) {
+        for (Book book : allBooks) {
             if (book.getBookId().equals(bookId)) {
                 return book;
             }
         }
-       throw new InvalidBookIdException("No Book in inventor with " + bookId);
+       throw new InvalidBookIdException("No Book in inventory with " + bookId);
     }
 
     @Override
-    public List<LibraryBook> getBookByTitle(String Title) throws NullTitleException, InvalidTitleException {
+    public List<Book> getBooksByTitle(String Title) throws NullTitleException, InvalidTitleException {
         if(Title==null){
             throw new NullTitleException("No Book with a null Title");
 
         }
-        List<LibraryBook> copy=new ArrayList<>();
-        for(LibraryBook copies : allBooks){
+        List<Book> copy=new ArrayList<>();
+        for(Book copies : allBooks){
             if(copies.getTitle().toLowerCase().contains(Title.toLowerCase())){
-                copy.add(new LibraryBook(copies));
+                copy.add(new Book(copies));
             }
         }
 
@@ -56,7 +56,7 @@ public class LibraryInMemDAO implements LibraryDAO{
     }
 
     @Override
-    public List<LibraryBook> getBookByAuthor(String Author) throws NullAuthorException {
+    public List<Book> getBooksByAuthor(String Author) throws NullAuthorException {
         if(Author==null){
             throw new NullAuthorException("No Book with a null Author(s)");
 
@@ -69,20 +69,20 @@ public class LibraryInMemDAO implements LibraryDAO{
     }
 
     @Override
-    public List<LibraryBook> getBookByYear(Integer Year) throws InvalidYearException,NullYearException {
+    public List<Book> getBooksByYear(Integer Year) throws InvalidYearException,NullYearException {
     Calendar calendar=Calendar.getInstance();
     calendar.setTime(new Date());
     int year=calendar.get(Calendar.YEAR);
         if(Year==null){
-            throw new NullYearException("No book with 0 year");
+            throw new NullYearException("No book with null year");
         }
         if(Year>year || Year < 1960){
             throw new InvalidYearException("Cannot get book with future year or older then 1960");
         }
-        List<LibraryBook> copy=new ArrayList<>();
-        for(LibraryBook copies : allBooks){
+        List<Book> copy=new ArrayList<>();
+        for(Book copies : allBooks){
             if(copies.getYear().equals(Year)){
-                copy.add(new LibraryBook(copies));
+                copy.add(new Book(copies));
             }
         }
 
@@ -92,13 +92,13 @@ public class LibraryInMemDAO implements LibraryDAO{
     }
 
     @Override
-    public LibraryBook UpdateBook(Integer bookId,LibraryBook UpdatedBook) throws InvalidBookIdException,NullBookIdException {
+    public Book editBook(Integer bookId, Book UpdatedBook) throws InvalidBookIdException,NullBookIdException {
 
         if(bookId==null){
             throw new NullBookIdException("Cannot Update book with null id");
 
         }
-        for(LibraryBook book : allBooks){
+        for(Book book : allBooks){
             if(book.getBookId().equals(bookId)){
                 book.setTitle(UpdatedBook.getTitle());
                 book.setAuthor(UpdatedBook.getAuthor());
@@ -124,7 +124,8 @@ public class LibraryInMemDAO implements LibraryDAO{
     }
 
     @Override
-    public LibraryBook addBook(LibraryBook Newbook) throws InvalidAuthorException, NullTitleException, InvalidYearException,InvalidTitleException,NullYearException,NullAuthorException{
+    public Book addBook(Book Newbook) throws InvalidAuthorException, NullTitleException, InvalidYearException,InvalidTitleException,NullYearException,NullAuthorException{
+        Integer id=1;
         Calendar calendar=Calendar.getInstance();
         calendar.setTime(new Date());
         int year=calendar.get(Calendar.YEAR);

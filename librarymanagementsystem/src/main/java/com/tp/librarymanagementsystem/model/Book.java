@@ -1,26 +1,23 @@
 package com.tp.librarymanagementsystem.model;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
-public class LibraryBook {
+public class Book {
 
     private Integer bookId;
     private String Title;
     private List<String> Author;
     private Integer Year;
 
-    public LibraryBook(Integer bookId, String title, List<String> author, Integer year) {
+    public Book(Integer bookId, String title, List<String> author, Integer year) {
         this.bookId = bookId;
         this.Title = title;
         this.Author = author;
         this.Year = year;
     }
-    public LibraryBook (LibraryBook that){
+    public Book(Book that){
+
         this.bookId=that.bookId;
         this.Title=that.Title;
         this.Author= new ArrayList<>();

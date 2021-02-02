@@ -1,26 +1,26 @@
 package com.tp.librarymanagementsystem.persistence;
 
 import com.tp.librarymanagementsystem.exceptions.*;
-import com.tp.librarymanagementsystem.model.LibraryBook;
+import com.tp.librarymanagementsystem.model.Book;
 
-import java.util.Date;
 import java.util.List;
 
 public interface LibraryDAO {
-    List<LibraryBook> getAllBooks();
-    LibraryBook getBookById(Integer bookId) throws NullBookIdException, InvalidBookIdException;
 
-    List<LibraryBook> getBookByTitle(String Title) throws NullTitleException, InvalidTitleException;
+    List<Book> getAllBooks();
+    Book getBookById(Integer bookId) throws NullBookIdException, InvalidBookIdException;
 
-     List<LibraryBook> getBookByAuthor(String Author) throws NullAuthorException;
+    List<Book> getBooksByTitle(String Title) throws NullTitleException, InvalidTitleException;
 
-     List<LibraryBook> getBookByYear(Integer Year) throws InvalidYearException,NullYearException;
+     List<Book> getBooksByAuthor(String Author) throws NullAuthorException;
 
-     LibraryBook UpdateBook(Integer bookId,LibraryBook NewBook) throws InvalidBookIdException, NullBookIdException;
+     List<Book> getBooksByYear(Integer Year) throws InvalidYearException,NullYearException;
+
+     Book editBook(Integer bookId, Book NewBook) throws InvalidBookIdException, NullBookIdException;
 
      void DeleteBook(Integer bookId) throws InvalidBookIdException;
 
 
-    LibraryBook addBook(LibraryBook book) throws InvalidAuthorException, InvalidYearException,
+    Book addBook(Book book) throws InvalidAuthorException, InvalidYearException,
             NullYearException, NullTitleException,InvalidTitleException,NullAuthorException;
 }

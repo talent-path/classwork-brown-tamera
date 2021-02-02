@@ -1,13 +1,11 @@
 package com.tp.librarymanagementsystem.service;
 
 import com.tp.librarymanagementsystem.exceptions.*;
-import com.tp.librarymanagementsystem.model.LibraryBook;
+import com.tp.librarymanagementsystem.model.Book;
 import com.tp.librarymanagementsystem.persistence.LibraryDAO;
-import com.tp.librarymanagementsystem.persistence.LibraryInMemDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -15,35 +13,35 @@ public class LibraryService {
     @Autowired
     LibraryDAO dao;
 
-    public List<LibraryBook> getAllBooks() {
+    public List<Book> getAllBooks() {
         return dao.getAllBooks();
     }
 
-    public LibraryBook getBookById(Integer bookId) throws  NullBookIdException,InvalidBookIdException {
+    public Book getBookById(Integer bookId) throws  NullBookIdException,InvalidBookIdException {
         return dao.getBookById(bookId);
     }
 
-    public List<LibraryBook> getBookByTitle(String title) throws NullTitleException, InvalidTitleException{
-        return dao.getBookByTitle(title);
+    public List<Book> getBooksByTitle(String title) throws NullTitleException, InvalidTitleException{
+        return dao.getBooksByTitle(title);
     }
 
-    public List<LibraryBook> getBookByAuthor(String author) throws NullAuthorException {
-        return dao.getBookByAuthor(author);
+    public List<Book> getBooksByAuthor(String author) throws NullAuthorException {
+        return dao.getBooksByAuthor(author);
     }
 
-    public List<LibraryBook> getBookByYear(Integer year) throws InvalidYearException,NullYearException {
-        return dao.getBookByYear(year);
+    public List<Book> getBooksByYear(Integer year) throws InvalidYearException,NullYearException {
+        return dao.getBooksByYear(year);
     }
 
-    public void UpdateBook(Integer bookId, LibraryBook NewBook) throws InvalidBookIdException, NullBookIdException {
-        dao.UpdateBook(bookId,NewBook);
+    public void editBook(Integer bookId, Book NewBook) throws InvalidBookIdException, NullBookIdException {
+        dao.editBook(bookId,NewBook);
     }
 
     public void DeleteBook(Integer bookId) throws InvalidBookIdException {
         dao.DeleteBook(bookId);
     }
 
-    public LibraryBook addBook(LibraryBook book) throws InvalidAuthorException, NullTitleException, InvalidYearException, NullYearException, InvalidTitleException, NullAuthorException {
+    public Book addBook(Book book) throws InvalidAuthorException, NullTitleException, InvalidYearException, NullYearException, InvalidTitleException, NullAuthorException {
         return dao.addBook(book);
     }
 }

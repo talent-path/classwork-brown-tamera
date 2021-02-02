@@ -1,12 +1,12 @@
 package com.tp.librarymanagementsystem.controller;
 
 import com.tp.librarymanagementsystem.exceptions.*;
-import com.tp.librarymanagementsystem.model.LibraryBook;
+import com.tp.librarymanagementsystem.model.Book;
 import com.tp.librarymanagementsystem.service.LibraryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -16,40 +16,42 @@ public class LibraryController {
     LibraryService service;
 
     @GetMapping("/books")
-    public List<LibraryBook> getAllBooks() {
+    public List<Book> getAllBooks() {
         return service.getAllBooks();
     }
 
     @GetMapping("/books/{bookId}")
-    public LibraryBook getBookById(@PathVariable Integer bookId) throws NullBookIdException, InvalidBookIdException {
+    public Book getBookById(@PathVariable Integer bookId) throws NullBookIdException, InvalidBookIdException {
         return service.getBookById(bookId);
 
     }
 
     @GetMapping("/books/title/{Title}")
-    public List<LibraryBook> getBookByTitle(@PathVariable String Title) throws NullTitleException, InvalidTitleException {
-        return service.getBookByTitle(Title);
+    public List<Book> getBooksByTitle(@PathVariable String Title) throws NullTitleException, InvalidTitleException {
+        return service.getBooksByTitle(Title);
     }
 
     @GetMapping("/books/author/{Author}")
-    public List<LibraryBook> getBookByAuthor(@PathVariable String Author) throws NullAuthorException {
-        return service.getBookByAuthor(Author);
+    public List<Book> getBooksByAuthor(@PathVariable String Author) throws NullAuthorException {
+        return service.getBooksByAuthor(Author);
     }
 
     @GetMapping("books/year/{Year}")
-    public List<LibraryBook> getBookByYear(@PathVariable int Year) throws InvalidYearException,NullYearException {
-        return service.getBookByYear(Year);
+    public List<Book> getBooksByYear(@PathVariable int Year) throws InvalidYearException,NullYearException {
+        return service.getBooksByYear(Year);
     }
 
     @PostMapping("/books/add")
-    public LibraryBook addBook(@RequestBody LibraryBook book) throws InvalidAuthorException, NullTitleException, InvalidYearException, NullYearException, InvalidTitleException, NullAuthorException {
-        return service.addBook(book);
+    public ResponseEntity addBook(@RequestBody Book book) throws InvalidAuthorException, NullTitleException, InvalidYearException, NullYearException, InvalidTitleException, NullAuthorException {
+        Book finishedBook= service.addBook(book);
+       return ResponseEntity.ok(finishedBook);
+
     }
 
     @PutMapping("/books/update/{bookId}")
-    public void UpdateBook(@PathVariable Integer bookId, @RequestBody LibraryBook request) throws InvalidBookIdException, NullBookIdException {
+    public void editBook(@PathVariable Integer bookId, @RequestBody Book request) throws InvalidBookIdException, NullBookIdException {
 
-        service.UpdateBook(bookId, request);
+        service.editBook(bookId, request);
     }
 
 
