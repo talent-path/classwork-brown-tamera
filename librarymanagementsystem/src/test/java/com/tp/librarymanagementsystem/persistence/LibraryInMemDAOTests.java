@@ -71,6 +71,8 @@ public void addBookGoldenPathTest() {
         assertEquals("Obama", validate.getAuthor().get(0));
         assertEquals(2019,validate2.getYear());
 
+
+
        // assertThrows(InvalidAuthorException.class, ()->toTest.addBook(test));
 
     } catch (InvalidAuthorException | InvalidYearException | NullTitleException | InvalidTitleException | NullYearException | NullAuthorException e) {
@@ -78,6 +80,25 @@ public void addBookGoldenPathTest() {
 
     }
 }
+@Test
+//public void addBook(){
+//        try{
+//          List<String> authors=new ArrayList<>();
+//          authors.add("Author 1");
+//
+//          Book NullTitle= new Book(3,null,authors,1992);
+//          assertThrows(NullTitleException.class,()->toTest.addBook(NullTitle));
+//          toTest.addBook(NullTitle);
+//          fail();
+//
+//      }catch ()
+//
+//
+//
+//
+//
+//
+//}
 @Test
 public void NullBookObjectTest() throws NullBookObjectException{
 
@@ -173,6 +194,11 @@ public void NullBookObjectTest() throws NullBookObjectException{
     @Test
     public void getBookByAuthorNullTest() {
         assertThrows(NullAuthorException.class,()->toTest.getBooksByAuthor(null));
+    }
+
+    @Test
+    public void getBooksByTitle(){
+        Book test = toTest.getBooksByTitle("")
     }
 
 

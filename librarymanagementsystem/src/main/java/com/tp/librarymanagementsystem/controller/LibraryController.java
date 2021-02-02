@@ -16,29 +16,39 @@ public class LibraryController {
     LibraryService service;
 
     @GetMapping("/books")
-    public List<Book> getAllBooks() {
-        return service.getAllBooks();
+    public ResponseEntity getAllBooks() {
+        List<Book> books=service.getAllBooks();
+        return ResponseEntity.ok(books);
+
     }
 
     @GetMapping("/books/{bookId}")
-    public Book getBookById(@PathVariable Integer bookId) throws NullBookIdException, InvalidBookIdException {
-        return service.getBookById(bookId);
+    public ResponseEntity getBookById(@PathVariable Integer bookId) throws NullBookIdException, InvalidBookIdException {
+        Book retreivedBook=service.getBookById(bookId);
+        return ResponseEntity.ok(retreivedBook);
+
 
     }
 
     @GetMapping("/books/title/{Title}")
-    public List<Book> getBooksByTitle(@PathVariable String Title) throws NullTitleException, InvalidTitleException {
-        return service.getBooksByTitle(Title);
+    public ResponseEntity getBooksByTitle(@PathVariable String Title) throws NullTitleException, InvalidTitleException {
+        List<Book> books=service.getBooksByTitle(Title);
+        return ResponseEntity.ok(books);
+
     }
 
     @GetMapping("/books/author/{Author}")
-    public List<Book> getBooksByAuthor(@PathVariable String Author) throws NullAuthorException {
-        return service.getBooksByAuthor(Author);
+    public ResponseEntity getBooksByAuthor(@PathVariable String Author) throws NullAuthorException {
+        List<Book> books=service.getBooksByAuthor(Author);
+        return ResponseEntity.ok(books);
+
     }
 
     @GetMapping("books/year/{Year}")
-    public List<Book> getBooksByYear(@PathVariable int Year) throws InvalidYearException,NullYearException {
-        return service.getBooksByYear(Year);
+    public ResponseEntity getBooksByYear(@PathVariable int Year) throws InvalidYearException,NullYearException {
+        List<Book> books=service.getBooksByYear(Year);
+        return ResponseEntity.ok(books);
+
     }
 
     @PostMapping("/books/add")
@@ -49,9 +59,10 @@ public class LibraryController {
     }
 
     @PutMapping("/books/update/{bookId}")
-    public void editBook(@PathVariable Integer bookId, @RequestBody Book request) throws InvalidBookIdException, NullBookIdException {
+    public String editBook(@PathVariable Integer bookId, @RequestBody Book request) throws InvalidBookIdException, NullBookIdException {
 
         service.editBook(bookId, request);
+        return "Book " + bookId + "successfully edited";
     }
 
 

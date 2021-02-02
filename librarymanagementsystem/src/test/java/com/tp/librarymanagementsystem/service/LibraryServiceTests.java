@@ -10,8 +10,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 public class LibraryServiceTests {
@@ -22,27 +22,25 @@ public class LibraryServiceTests {
     public void setUp() throws InvalidBookIdException {
         try {
             List<Book> allBooks = toTest.getAllBooks();
-            for(int i=0; i<allBooks.size();i++){
+            for (int i = 0; i < allBooks.size(); i++) {
 
                 toTest.DeleteBook(i);
             }
 
-            List<String> Authors = new ArrayList<>();
-            Authors.add("Obama");
-            Book test = new Book(0, "A Promised Land", Authors, 2020);
-            toTest.addBook(test);
-        } catch (InvalidBookIdException | InvalidYearException | InvalidAuthorException | NullTitleException | NullYearException | InvalidTitleException | NullAuthorException e) {
-            fail();
+//            List<String> Authors = new ArrayList<>();
+//            Authors.add("Obama");
+//            Book test = new Book(0, "A Promised Land", Authors, 2020);
+//            toTest.addBook(test);
+        } catch (InvalidBookIdException e) {
+
         }
     }
     @Test
     public void getBookByYearInvalidTest() {
-        try {
-            List<Book> test = toTest.getBooksByYear(-1);
-            fail();
-        } catch (InvalidYearException | NullYearException e) {
-            //do nothing
-        }
+
+        assertThrows(InvalidYearException.class,()->toTest.getBooksByYear(-1));
+        //assertThrows(NullYearException.class,()->toTest.getBooksByYear(-1));
+
     }
 
     @Test
