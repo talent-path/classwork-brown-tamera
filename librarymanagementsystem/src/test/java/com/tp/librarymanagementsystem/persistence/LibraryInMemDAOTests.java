@@ -18,23 +18,18 @@ public class LibraryInMemDAOTests {
     LibraryInMemDAO toTest;
 
     @BeforeEach
-    public void setUp() throws InvalidBookIdException {
+    public void setUp() throws InvalidBookIdException, NullBookIdException, NullTitleException, NullBookObjectException, InvalidTitleException, NullYearException, InvalidYearException, NullAuthorException, InvalidAuthorException {
 
 
         List<Book> allBooks = toTest.getAllBooks();
-        for (int i = 0; i < allBooks.size(); i++) {
+        for (int i = 1; i < allBooks.size(); i++) {
 
             toTest.DeleteBook(i);
         }
 
+
     }
 
-//            List<String> Authors = new ArrayList<>();
-//            Authors.add("Obama");
-//            Book test = new Book(0, "A Promised Land", Authors, 2020);
-//            toTest.addBook(test);
-//            Book test2= new Book(1,"Becoming",Authors,2019);
-//            toTest.addBook(test2);
 
     @Test
     public void addBookGoldenPathTest() {
@@ -44,158 +39,121 @@ public class LibraryInMemDAOTests {
             authors.add("Yusef Salaam");
 
             Book test = new Book(1, "Punching the Air", authors, 2020);
-           Book returned= toTest.addBook(test);
-            Book validate=toTest.getBookById(1);
+            Book returned = toTest.addBook(test);
+            Book validate = toTest.getBookById(1);
 
-            assertEquals(1,returned.getBookId());
-            assertEquals(2,returned.getAuthors().size());
-            assertEquals("libi Zoboi",returned.getAuthors().get(0));
-            assertEquals("Punching the Air",returned.getTitle());
+            assertEquals(1, returned.getBookId());
+            assertEquals(2, returned.getAuthors().size());
+            assertEquals("libi Zoboi", returned.getAuthors().get(0));
+            assertEquals("Punching the Air", returned.getTitle());
             assertEquals(2020, returned.getYear());
 
+            assertEquals(1, validate.getBookId());
+            assertEquals(2, validate.getAuthors().size());
+            assertEquals("libi Zoboi", validate.getAuthors().get(0));
+            assertEquals("Punching the Air", validate.getTitle());
+            assertEquals(2020, validate.getYear());
+
+            List<String> secondAuthors = new ArrayList<>();
+            secondAuthors.add("Barack Obama");
+            Book test2 = new Book(2, "A Promised Land", secondAuthors, 2020);
+            Book returned2 = toTest.addBook(test2);
+            Book validate2 = toTest.getBookById(2);
+
+            assertEquals(2, returned2.getBookId());
+            assertEquals(1, returned2.getAuthors().size());
+            assertEquals("Barack Obama", returned2.getAuthors().get(0));
+            assertEquals("A Promised Land", returned2.getTitle());
+            assertEquals(2020, returned2.getYear());
+
+            assertEquals(2, validate2.getBookId());
+            assertEquals(1, validate2.getAuthors().size());
+            assertEquals("Barack Obama", validate2.getAuthors().get(0));
+            assertEquals("A Promised Land", validate2.getTitle());
+            assertEquals(2020, validate2.getYear());
 
 
-
-
-
-//            assertEquals("Punching the Air", validate.getTitle());
-//            assertEquals(2, validate.getAuthors().size());
-//            assertEquals("libi Zoboi", authors.get(0));
-//            assertEquals("Yusef Salaam", authors.get(1));
-//            assertEquals(2020, validate.getYear());
-//            assertEquals(1, validate.getBookId());
-//
-//            List<String> secondAuthors=new ArrayList<>();
-//            secondAuthors.add("Obama");
-//
-//            Book test2=new Book(2,"Becoming",secondAuthors,2019 );
-//            toTest.addBook(test2);
-//            Book validate2=toTest.getBookById(2);
-//            assertEquals("Becoming", validate2.getTitle());
-//            assertEquals(1, validate2.getAuthors().size());
-//            assertEquals("Obama", secondAuthors.get(0));
-//            assertEquals(2019, validate.getYear());
-//            assertEquals(2, validate.getBookId());
-//
-//
-//
-
-
-
-        } catch (InvalidBookIdException | NullBookIdException | NullTitleException | InvalidTitleException | NullYearException | InvalidYearException | NullAuthorException | InvalidAuthorException e) {
+        } catch (InvalidBookIdException | NullBookIdException | NullTitleException | InvalidTitleException | NullYearException | InvalidYearException | NullAuthorException | InvalidAuthorException | NullBookObjectException e) {
             fail();
         }
     }
 
-//@Test
-//public void NullBookObjectTest(){
-//
-//      assertThrows(NullBookObjectException.class,()->toTest.addBook(null));
-//}
-//
-//
-//
-//    @Test
-//    public void getBookGoldenPathTest() {
-//
-//        try {
-//            Book test = toTest.getBookById(1);
-//            System.out.println(test.getTitle());
-//            assertTrue(test.getTitle().equals("Punching the Air"));
-//            assertEquals(1, test.getBookId());
-//            assertEquals(2020, test.getYear());
-//            assertEquals(2, test.getAuthor().size());
-//
-//        } catch (InvalidBookIdException | NullBookIdException e) {
-//            fail();
-//        }
-//
-//    }
-//
-//
-//
-//    @Test
-//    public void addBookNullTitleTest(){
-//        try {
-//            List<String> authors = new ArrayList<>();
-//            authors.add("Me");
-//            authors.add("John");
-//            authors.add("Shannon");
-//            Book book = new Book(0, null, authors, 1997);
-//            toTest.addBook(book);
-//        } catch (InvalidAuthorException | InvalidTitleException | InvalidYearException | NullYearException | NullAuthorException e) {
-//            fail();
-//
-//        } catch (NullTitleException e) {
-//            //do nothing
-//        }
-//    }
-//    @Test
-//    public void addBookNullAuthorsTest() {
-//        try {
-//            Book book = new Book(0, "First Book", null, 2021);
-//            toTest.addBook(book);
-//
-//        } catch (NullTitleException | InvalidYearException | NullYearException | InvalidTitleException e) {
-//            fail();
-//        } catch (NullAuthorException | InvalidAuthorException |NullPointerException e) {
-//            //do nothing
-//        }
-//    }
-//    @Test
-//    public void addBookNullYearTest(){
-//        List<String> authors=new ArrayList<>();
-//        authors.add("Tyler Perry");
-//        authors.add("Tamera");
-//        try {
-//            Book book = new Book(0, "First Book", authors, null);
-//            toTest.addBook(book);
-//
-//        } catch (NullTitleException | InvalidYearException | NullAuthorException | InvalidTitleException | InvalidAuthorException e) {
-//            fail();
-//        } catch (NullYearException e) {
-//            //do nothing
-//        }
-//    }
-//    @Test
-//    public void DeleteBookGoldenPath() {
-//
-//        assertThrows(InvalidBookIdException.class,()->toTest.DeleteBook(1));
-//    }
-//    @Test
-//    public void getBookByIdNullTest() {
-//
-//            assertThrows(NullBookIdException.class,()->toTest.getBookById(null));
-//
-//
-//    }
-//    @Test
-//    public void getBookByTitleNullTest() {
-//
-//
-//            assertThrows(NullTitleException.class,()->toTest.getBooksByTitle(null));
-//            assertThrows(InvalidTitleException.class,()->toTest.getBooksByTitle(null));
-//
-//
-//    }
-//    @Test
-//    public void getBookByAuthorNullTest() {
-//        assertThrows(NullAuthorException.class,()->toTest.getBooksByAuthor(null));
-//    }
-//
-//    @Test
-//    public void getAllBookGoldenPathTest(){
-//        List<Book> test=toTest.getAllBooks();
-//        System.out.println(test);
-//        assertEquals("libi Zoboi",test.get(0).getAuthor().get(0));
-//        assertEquals(1,test.size());
-//        assertEquals("Punching the Air",test.get(0).getTitle());
-//        assertEquals(2020,test.get(0).getYear());
-//        assertEquals(1,test.get(0).getAuthor().size());
-//        assertEquals(1,test.get(0).getBookId());
-//
-//    }
-//
-//
+    @Test
+    public void addBookNullBookObjectTest() {
+
+        assertThrows(NullBookObjectException.class, () -> toTest.addBook(null));
+    }
+
+    @Test
+    public void addBookNullTitleTest() {
+        List<String> authors = new ArrayList<>();
+        authors.add("Author 1");
+        authors.add("Author 2");
+        assertThrows(NullTitleException.class, () -> toTest.addBook(new Book(3, null, authors, 2009)));
+    }
+
+    @Test
+    public void addBookNullAuthorsTest() {
+        assertThrows(NullAuthorException.class, () -> toTest.addBook(new Book(4, "To Kill A Mockingbird", null, 1960)));
+    }
+
+    @Test
+    public void addBookNullYearTest() {
+        List<String> authors = new ArrayList<>();
+        authors.add("Mark Twain");
+        assertThrows(NullYearException.class, () -> toTest.addBook(new Book(5, "The Adventures Huckleberry Finn", authors, null)));
+    }
+
+    @Test
+    public void getBooksNullIdTest() {
+        assertThrows(NullBookIdException.class, () -> toTest.getBookById(null));
+    }
+
+    @Test
+    public void getBooksNullTitleTest() {
+        assertThrows(NullTitleException.class, () -> toTest.getBooksByTitle(null));
+    }
+
+    @Test
+    public void getBooksNullAuthorsTest() {
+        assertThrows(NullAuthorException.class, () -> toTest.getBooksByAuthor(null));
+
+    }
+
+    @Test
+    public void getBooksNullYearTest() {
+        assertThrows(NullYearException.class, () -> toTest.getBooksByYear(null));
+    }
+
+    @Test
+    public void editBookNullIdTest() {
+        List<String> authors = new ArrayList<>();
+        authors.add("Suzanne Collins");
+        assertThrows(NullBookIdException.class, () -> toTest.editBook(null, new Book(1, "Hunger Games: Mocking Jay", authors, 2003)));
+    }
+    @Test
+    public void editBookNullYearTest(){
+        List<String> authors = new ArrayList<>();
+        authors.add("Suzanne Collins");
+        assertThrows(NullYearException.class, () -> toTest.editBook(3, new Book(3, "Hunger Games: Mocking Jay", authors, null)));
+
+    }
+    @Test
+    public void editBookNullAuthorsTest(){
+
+        assertThrows(NullAuthorException.class, () -> toTest.editBook(3, new Book(3, "Hunger Games: Mocking Jay", null ,1998)));
+
+    }
+    @Test
+    public void editBookNullTitleTest(){
+        List<String> authors = new ArrayList<>();
+        authors.add("Suzanne Collins");
+        assertThrows(NullTitleException.class, () -> toTest.editBook(3, new Book(3, null, null ,1998)));
+
+    }
+    @Test
+    public void deleteBookNullIdTest(){
+        assertThrows(NullBookIdException.class,()->toTest.DeleteBook(null));
+    }
 
 }

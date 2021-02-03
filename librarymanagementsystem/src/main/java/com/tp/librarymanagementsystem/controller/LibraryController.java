@@ -79,7 +79,7 @@ public class LibraryController {
         try {
             finishedBook = service.addBook(book);
 
-        } catch (InvalidAuthorException | NullTitleException | InvalidYearException | NullYearException | InvalidTitleException | NullAuthorException e) {
+        } catch (InvalidAuthorException | NullTitleException | InvalidYearException | NullYearException | InvalidTitleException | NullAuthorException | NullBookObjectException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
         return ResponseEntity.ok(finishedBook);
@@ -91,7 +91,7 @@ public class LibraryController {
 
         try {
             service.editBook(bookId, request);
-        } catch (InvalidBookIdException | NullBookIdException e) {
+        } catch (InvalidBookIdException | NullBookIdException | NullAuthorException | NullYearException | NullTitleException e) {
             return "Cannot update book with id " + bookId;
         }
           return "Book with id " + bookId + "edited";
@@ -103,7 +103,7 @@ public class LibraryController {
         try {
             service.DeleteBook(bookId);
             return "Book " + bookId + " successfully deleted.";
-        } catch (InvalidBookIdException e) {
+        } catch (InvalidBookIdException | NullBookIdException e) {
             return e.getMessage();
         }
 

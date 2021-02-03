@@ -16,11 +16,11 @@ public interface LibraryDAO {
 
      List<Book> getBooksByYear(Integer Year) throws InvalidYearException,NullYearException;
 
-     Book editBook(Integer bookId, Book NewBook) throws InvalidBookIdException, NullBookIdException;
+     Book editBook(Integer bookId, Book NewBook) throws InvalidBookIdException, NullBookIdException, NullAuthorException, NullYearException, NullTitleException;
 
-     void DeleteBook(Integer bookId) throws InvalidBookIdException;
+     void DeleteBook(Integer bookId) throws InvalidBookIdException, NullBookIdException;
 
 
     Book addBook(Book book) throws InvalidAuthorException, InvalidYearException,
-            NullYearException, NullTitleException,InvalidTitleException,NullAuthorException;
+            NullYearException, NullTitleException,InvalidTitleException,NullAuthorException,NullBookObjectException;
 }

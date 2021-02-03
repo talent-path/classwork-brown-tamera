@@ -31,7 +31,7 @@ public class LibraryServiceTests {
 //            Authors.add("Obama");
 //            Book test = new Book(0, "A Promised Land", Authors, 2020);
 //            toTest.addBook(test);
-        } catch (InvalidBookIdException e) {
+        } catch (InvalidBookIdException | NullBookIdException e) {
 
         }
     }
@@ -77,7 +77,7 @@ public class LibraryServiceTests {
         } catch (InvalidAuthorException | NullTitleException | InvalidYearException | NullYearException e) {
             fail();
 
-        } catch (InvalidTitleException e) {
+        } catch (InvalidTitleException | NullBookObjectException e) {
             //do nothing
         } catch (NullAuthorException e) {
             e.printStackTrace();
@@ -96,7 +96,7 @@ public class LibraryServiceTests {
         } catch (InvalidAuthorException | NullTitleException | InvalidYearException | NullYearException e) {
             fail();
 
-        } catch (InvalidTitleException e) {
+        } catch (InvalidTitleException | NullBookObjectException e) {
             //do nothing
         } catch (NullAuthorException e) {
             e.printStackTrace();
@@ -115,7 +115,7 @@ public class LibraryServiceTests {
 
 
 
-        } catch (InvalidAuthorException | NullTitleException | NullYearException | InvalidTitleException | NullAuthorException e) {
+        } catch (InvalidAuthorException | NullTitleException | NullYearException | InvalidTitleException | NullAuthorException | NullBookObjectException e) {
             fail();
 
         } catch (InvalidYearException e) {
@@ -132,7 +132,7 @@ public class LibraryServiceTests {
             Book newBook = new Book(0, "Fledgling", authors, 2078);
             toTest.addBook(newBook);
 
-        } catch (InvalidAuthorException | NullTitleException | NullYearException | InvalidTitleException | NullAuthorException e) {
+        } catch (InvalidAuthorException | NullTitleException | NullYearException | InvalidTitleException | NullAuthorException | NullBookObjectException e) {
             fail();
 
         } catch (InvalidYearException e) {
@@ -147,7 +147,7 @@ public class LibraryServiceTests {
             authors.add("Jane");
             Book book = new Book(-999, "Second Book", authors, 2004);
             toTest.addBook(book);
-        } catch (InvalidAuthorException | NullTitleException | NullYearException | InvalidTitleException | NullAuthorException e) {
+        } catch (InvalidAuthorException | NullTitleException | NullYearException | InvalidTitleException | NullAuthorException | NullBookObjectException e) {
             e.printStackTrace();
 
         } catch (InvalidYearException e) {

@@ -92,11 +92,24 @@ public class LibraryInMemDAO implements LibraryDAO{
     }
 
     @Override
-    public Book editBook(Integer bookId, Book UpdatedBook) throws InvalidBookIdException,NullBookIdException {
+    public Book editBook(Integer bookId, Book UpdatedBook) throws InvalidBookIdException,NullBookIdException,NullAuthorException ,NullYearException, NullTitleException{
 
+        if(UpdatedBook.getTitle()==null){
+            throw new NullTitleException("Cannot update book with null title");
+        }
+
+         if(UpdatedBook.getAuthors()==null){
+             throw new NullAuthorException("Cannot update bokk with null authors");
+         }
+        if(UpdatedBook.getYear()==null){
+            throw new NullYearException("Cannot update book with null year");
+        }
         if(bookId==null){
             throw new NullBookIdException("Cannot Update book with null id");
 
+        }
+        if(UpdatedBook.getAuthors()==null){
+            throw new NullAuthorException("Cannot update with null authors");
         }
         for(Book book : allBooks){
             if(book.getBookId().equals(bookId)){
@@ -112,8 +125,11 @@ public class LibraryInMemDAO implements LibraryDAO{
     }
 
     @Override
-    public void DeleteBook(Integer bookId) throws InvalidBookIdException{
+    public void DeleteBook(Integer bookId) throws InvalidBookIdException, NullBookIdException{
 
+        if(bookId==null){
+            throw new NullBookIdException("Cannot delete with null book id");
+        }
         for(int i=0; i<allBooks.size();i++){
             if(allBooks.get(i).getBookId().equals(bookId)){
                 allBooks.remove(i);
@@ -124,12 +140,18 @@ public class LibraryInMemDAO implements LibraryDAO{
     }
 
     @Override
-    public Book addBook(Book Newbook) throws InvalidAuthorException, NullTitleException, InvalidYearException,InvalidTitleException,NullYearException,NullAuthorException{
+    public Book addBook(Book Newbook) throws InvalidAuthorException, NullTitleException, InvalidYearException,InvalidTitleException,NullYearException,NullAuthorException,NullBookObjectException{
         Integer id=0;
         Calendar calendar=Calendar.getInstance();
         calendar.setTime(new Date());
         int year=calendar.get(Calendar.YEAR);
 
+        if(Newbook==null){
+            throw new NullBookObjectException("Book object is null");
+        }
+        if(Newbook.getAuthors()==null){
+            throw new NullAuthorException("Cannot add book with null author");
+        }
         if(Newbook.getAuthors().size()==0){
             throw new InvalidAuthorException("Cannot add book without authors");
         }
