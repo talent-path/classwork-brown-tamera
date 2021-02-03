@@ -7,22 +7,22 @@ public class Book {
 
     private Integer bookId;
     private String Title;
-    private List<String> Author;
+    private List<String> Authors;
     private Integer Year;
 
-    public Book(Integer bookId, String title, List<String> author, Integer year) {
+    public Book(Integer bookId, String title, List<String> authors, Integer year) {
         this.bookId = bookId;
         this.Title = title;
-        this.Author = author;
+        this.Authors = authors;
         this.Year = year;
     }
     public Book(Book that){
 
         this.bookId=that.bookId;
         this.Title=that.Title;
-        this.Author= new ArrayList<>();
-        for( String toCopy : that.Author ){
-            this.Author.add( toCopy );
+        this.Authors= new ArrayList<>();
+        for( String toCopy : that.Authors ){
+            this.Authors.add( toCopy );
         }
 
         this.Year=that.Year;
@@ -45,12 +45,12 @@ public class Book {
         Title = title;
     }
 
-    public List<String> getAuthor() {
-        return Author;
+    public List<String> getAuthors() {
+        return Authors;
     }
 
-    public void setAuthor(List<String> author) {
-        Author = author;
+    public void setAuthors(List<String> authors) {
+        Authors = authors;
     }
 
     public Integer getYear() {

@@ -14,7 +14,7 @@ public class LibraryInMemDAO implements LibraryDAO{
 
 
     @Override
-    public List<Book> getAllBooks() {
+    public List<Book> getAllBooks(){
 
         List<Book> copy= new ArrayList<>();
         for(Book copies : allBooks){
@@ -36,7 +36,7 @@ public class LibraryInMemDAO implements LibraryDAO{
                 return book;
             }
         }
-       throw new InvalidBookIdException("No Book in inventory with " + bookId);
+       throw new InvalidBookIdException("No Book in inventory with id " + bookId);
     }
 
     @Override
@@ -62,7 +62,7 @@ public class LibraryInMemDAO implements LibraryDAO{
 
         }
 
-        return allBooks.stream().filter(book -> book.getAuthor().stream()
+        return allBooks.stream().filter(book -> book.getAuthors().stream()
                 .anyMatch(Author::equalsIgnoreCase)).collect(Collectors.toList());
 
 
@@ -101,7 +101,7 @@ public class LibraryInMemDAO implements LibraryDAO{
         for(Book book : allBooks){
             if(book.getBookId().equals(bookId)){
                 book.setTitle(UpdatedBook.getTitle());
-                book.setAuthor(UpdatedBook.getAuthor());
+                book.setAuthors(UpdatedBook.getAuthors());
                 book.setYear(UpdatedBook.getYear());
                 return book;
             }
@@ -125,12 +125,12 @@ public class LibraryInMemDAO implements LibraryDAO{
 
     @Override
     public Book addBook(Book Newbook) throws InvalidAuthorException, NullTitleException, InvalidYearException,InvalidTitleException,NullYearException,NullAuthorException{
-        Integer id=1;
+        Integer id=0;
         Calendar calendar=Calendar.getInstance();
         calendar.setTime(new Date());
         int year=calendar.get(Calendar.YEAR);
 
-        if(Newbook.getAuthor().size()==0){
+        if(Newbook.getAuthors().size()==0){
             throw new InvalidAuthorException("Cannot add book without authors");
         }
         if(Newbook.getYear()==null){
@@ -142,20 +142,26 @@ public class LibraryInMemDAO implements LibraryDAO{
         if (Newbook.getTitle() == "") {
             throw new InvalidTitleException("Cannot add book with empty title");
         }
-        if(Newbook.getAuthor()==null){
+        if(Newbook.getAuthors()==null){
             throw  new NullAuthorException("Cannot add book with null author");
         }
         if(Newbook.getYear()>year){
             throw  new InvalidYearException("Cannot add books with future year");
         }
 
+        for(Book toCheck : allBooks){
+            if(toCheck.getBookId()>id){
+                id=toCheck.getBookId();
+            }
+        }
+        id++;
 
-        Newbook.setBookId(id++);
+        Book copy=new Book(Newbook);
+        copy.setBookId(id);
+        allBooks.add(copy);
 
 
+        return copy;
 
-        allBooks.add(Newbook);
-
-        return Newbook;
     }
 }
