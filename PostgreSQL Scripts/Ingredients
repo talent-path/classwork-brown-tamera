@@ -1,0 +1,87 @@
+Ingredients
+    ingredientId        serial         PK
+    name                varchar        NOT NULL
+    stock                numeric     NULL
+    organic                boolean        NULL
+    storage?
+    category?
+
+ 
+
+Menus
+    menuId               serial         PK
+    name                varchar        NOT NULL
+    time of day?
+
+ 
+
+Recipes
+    recipeId             serial         PK
+    dishId                integer        FK, NOT NULL
+    name                varchar        NOT NULL
+    instructions        text        NOT NULL
+    prep time?
+
+ 
+
+Dishes
+    dishId                 serial        PK
+    name                varchar     NOT NULL
+
+ 
+
+
+Suppliers
+    supplierId            serial        PK
+    name                varchar        NOT NULL
+    location?
+    deliberyTime?
+
+ 
+
+
+Tabletops
+    tabletopId            serial        PK
+    seatCount            smallint    NULL?
+    category?
+
+ 
+
+Orders
+    orderId                serial        PK
+    tabletopId            integer        FK  NOT NULL?
+
+ 
+
+RecipieIngredients
+    recipeId             integer        PK FK
+    ingredientId        integer     PK FK
+    quantity            numeric        NOT NULL
+    unit                varchar        NOT NULL
+
+ 
+
+MenuDishes
+    menuId                 integer     PK FK
+    dishId                 integer     PK FK
+    price                numeric        NOT NULL
+
+ 
+
+
+SupplierIngredients
+    supplierId             integer        PK FK
+    ingredientId        integer        PK FK
+    qtyAvailable        numeric        NULL?
+    units                varchar        NULL?
+    unitCost            numeric        NOT NULL
+
+ 
+
+
+OrderDishes
+    orderId             integer        PK FK
+    dishId                integer        PK FK
+    menuId                 integer        PK FK
+    quantity            numeric        NOT NULL
+ 

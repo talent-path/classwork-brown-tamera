@@ -155,6 +155,10 @@ public class LibraryInMemDAO implements LibraryDAO{
         if(Newbook.getAuthors().size()==0){
             throw new InvalidAuthorException("Cannot add book without authors");
         }
+        if(Newbook.getAuthors().equals("")){
+            throw new InvalidAuthorException("Cannot add book with eempty authors");
+
+        }
         if(Newbook.getYear()==null){
             throw new NullYearException("Cannot add book without year");
         }
