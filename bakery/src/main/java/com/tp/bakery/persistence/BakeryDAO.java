@@ -8,4 +8,6 @@ public interface BakeryDAO {
     List<Dessert> getAllDesserts();
 
     Dessert addDessert(Dessert dessert);
+
+    Dessert getDessertById(Integer dessertId);
 }

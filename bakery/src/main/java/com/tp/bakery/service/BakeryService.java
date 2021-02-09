@@ -19,4 +19,8 @@ public class BakeryService {
         return dao.addDessert(dessert);
 
     }
+
+    public Dessert getDessertById(Integer dessertId) {
+        return dao.getDessertById(dessertId);
+    }
 }

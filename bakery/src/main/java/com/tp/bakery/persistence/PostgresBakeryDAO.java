@@ -31,6 +31,15 @@ public class PostgresBakeryDAO implements BakeryDAO{
         return dessert;
     }
 
+    @Override
+    public Dessert getDessertById(Integer dessertId) {
+////        List<Dessert> retreived=template.query("Select \"dessertId\",\"dessertName\" from \"Desserts\"\n" +
+////                "where \"dessertName\"= ?;\n",new BakeryIdMapper(),dessertId);
+//        if(retreived.isEmpty()) return null;
+//
+//        return retreived.get(0);
+    }
+
 
     class BakeryIdMapper implements RowMapper<Integer>{
 
