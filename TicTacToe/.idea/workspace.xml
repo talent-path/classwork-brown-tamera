@@ -5,16 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5edac460-894c-449e-b7ce-32197661cc09" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../Week1_Project/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Week1_Project/.idea/compiler.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Week1_Project/.idea/jarRepositories.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Week1_Project/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Week1_Project/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Week1_Project/Week1_Project.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Week1_Project/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Week1_Project/src/main/java/Console.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Week1_Project/src/main/java/Rng.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Week1_Project/src/main/java/TicTacToe.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
