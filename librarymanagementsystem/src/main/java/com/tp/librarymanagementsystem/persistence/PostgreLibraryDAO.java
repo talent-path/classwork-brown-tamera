@@ -80,7 +80,7 @@ public class PostgreLibraryDAO implements LibraryDAO {
     }
 
     private Integer getAuthorId(String author) {
-        List<Integer> id = template.query("SELECT \"authorID\" from \"Authors\" WHERE " +
+        List<Integer> id = template.query("SELECT \"authorId\" from \"Authors\" WHERE " +
                 "\"authorName\" = '"+ author +"'; ", new IdMapper());
 
         if(id.isEmpty()) return null;
