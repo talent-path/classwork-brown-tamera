@@ -23,7 +23,23 @@ public class PostgresBakeryDAO implements BakeryDAO{
 
     @Override
     public Dessert addDessert(Dessert dessert) {
-        return null;
+        Integer dessertId=template.queryForObject("insert into \"Desserts\" (\"dessertName\") \n" +
+                "values (?) returning \"dessertId\";",new BakeryIdMapper(),dessert.getName()) ;
+
+        dessert.setDessertId(dessertId);
+
+        return dessert;
+    }
+
+
+    class BakeryIdMapper implements RowMapper<Integer>{
+
+        @Override
+        public Integer mapRow(ResultSet resultSet, int i) throws SQLException {
+            return resultSet.getInt("dessertId");
+
+
+        }
     }
     class BakeryMapper implements RowMapper<Dessert> {
 
