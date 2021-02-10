@@ -1,6 +1,8 @@
 package com.tp.bakery.persistence;
 
 import com.tp.bakery.model.Dessert;
+import com.tp.bakery.persistence.mappers.BakeryMapper;
+import com.tp.bakery.persistence.mappers.IntegerMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -24,7 +26,7 @@ public class PostgresBakeryDAO implements BakeryDAO{
     @Override
     public Dessert addDessert(Dessert dessert) {
         Integer dessertId=template.queryForObject("insert into \"Desserts\" (dessertId\", \"dessertName\", \"dessertDescription\")\n" +
-                "values (?,?,?) returning \"dessertId\";",new BakeryIdMapper(),dessert.getName(),dessert.getDescription()) ;
+                "values (?,?,?) returning \"dessertId\";",new IntegerMapper("dessertId"),dessert.getName(),dessert.getDescription()) ;
 
         dessert.setDessertId(dessertId);
 
@@ -61,26 +63,8 @@ public class PostgresBakeryDAO implements BakeryDAO{
     }
 
 
-    class BakeryIdMapper implements RowMapper<Integer>{
 
-        @Override
-        public Integer mapRow(ResultSet resultSet, int i) throws SQLException {
-            return resultSet.getInt("dessertId");
-
-
-        }
     }
-    class BakeryMapper implements RowMapper<Dessert> {
 
-        @Override
-        public Dessert mapRow(ResultSet resultSet, int i) throws SQLException {
-            Dessert mappedDessert = new Dessert();
-            mappedDessert.setDessertId( resultSet.getInt("dessertId") );
-            mappedDessert.setName( resultSet.getString( "dessertName") );
-            mappedDessert.setDescription(resultSet.getString("dessertDescription"));
 
-            return mappedDessert;
-        }
-    }
-}
 

@@ -1,10 +1,10 @@
 package com.tp.bakery.execptions;
 
-public class NullDessertObject extends Exception {
-    public NullDessertObject(String message){
+public class NullDessertObjectException extends Exception {
+    public NullDessertObjectException(String message){
         super(message);
     }
-    public NullDessertObject(String message, Throwable innerexception){
+    public NullDessertObjectException(String message, Throwable innerexception){
         super(message,innerexception);
     }
 }
