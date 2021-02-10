@@ -23,4 +23,13 @@ public class BakeryService {
     public Dessert getDessertById(Integer dessertId) {
         return dao.getDessertById(dessertId);
     }
+
+
+    public Dessert editDessert(Integer dessertId, Dessert dessert) {
+        return dao.editDessert(dessert,dessert);
+    }
+
+    public Dessert deleteDessert(Integer dessertId) {
+        return dao.deleteDessert(dessertId);
+    }
 }

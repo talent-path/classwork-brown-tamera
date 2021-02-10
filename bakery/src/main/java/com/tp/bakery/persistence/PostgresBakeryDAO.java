@@ -40,6 +40,16 @@ public class PostgresBakeryDAO implements BakeryDAO{
 
     }
 
+    @Override
+    public Dessert editDessert(Dessert dessert, Dessert dessert1) {
+        return null;
+    }
+
+    @Override
+    public Dessert deleteDessert(Integer dessertId) {
+        return null;
+    }
+
 
     class BakeryIdMapper implements RowMapper<Integer>{
 

@@ -21,11 +21,10 @@ public class BakeryController {
     }
 
     @GetMapping("/dessert/{dessertId}")
-    public ResponseEntity getDessertById(@PathVariable Integer dessertId){
-      Dessert retrievedDessert=service.getDessertById(dessertId);
-      return ResponseEntity.ok(retrievedDessert);
+    public ResponseEntity getDessertById(@PathVariable Integer dessertId) {
+        Dessert retrievedDessert = service.getDessertById(dessertId);
+        return ResponseEntity.ok(retrievedDessert);
     }
-
 
 
     @PostMapping("/addDessert")
@@ -34,6 +33,19 @@ public class BakeryController {
        Dessert newDessert=service.addDessert(dessert);
        return ResponseEntity.ok(newDessert);
     }
+    @PutMapping("/editDessert/{dessertId}")
+    public ResponseEntity editDessert(@PathVariable Integer dessertId, @RequestBody Dessert dessert){
+
+    Dessert edited=service.editDessert(dessertId,dessert);
+    return ResponseEntity.ok(edited);
+
+    }
+    @DeleteMapping("/deleteDessert/{dessertId}")
+    public ResponseEntity deleteDessert(@PathVariable Integer dessertId){
+    Dessert deleted=service.deleteDessert(dessertId);
+    return ResponseEntity.ok(deleted);
+    }
+
 
 
 

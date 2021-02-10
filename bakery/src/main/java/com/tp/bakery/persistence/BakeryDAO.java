@@ -10,4 +10,8 @@ public interface BakeryDAO {
     Dessert addDessert(Dessert dessert);
 
     Dessert getDessertById(Integer dessertId);
+
+    Dessert editDessert(Dessert dessert, Dessert dessert1);
+
+    Dessert deleteDessert(Integer dessertId);
 }
