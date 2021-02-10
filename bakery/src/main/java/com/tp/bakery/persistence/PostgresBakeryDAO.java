@@ -17,14 +17,14 @@ public class PostgresBakeryDAO implements BakeryDAO{
 
     @Override
     public List<Dessert> getAllDesserts() {
-        List<Dessert> allDesserts=template.query("Select \"dessertId\",\"dessertName\" from \"Desserts\";",new BakeryMapper());
+        List<Dessert> allDesserts=template.query("select \"dessertId\", \"dessertName\", \"dessertDescription\" from \"Desserts\";",new BakeryMapper());
         return allDesserts;
     }
 
     @Override
     public Dessert addDessert(Dessert dessert) {
-        Integer dessertId=template.queryForObject("insert into \"Desserts\" (\"dessertName\") \n" +
-                "values (?) returning \"dessertId\";",new BakeryIdMapper(),dessert.getName()) ;
+        Integer dessertId=template.queryForObject("insert into \"Desserts\" (dessertId\", \"dessertName\", \"dessertDescription\")\n" +
+                "values (?,?,?) returning \"dessertId\";",new BakeryIdMapper(),dessert.getName(),dessert.getDescription()) ;
 
         dessert.setDessertId(dessertId);
 
@@ -33,11 +33,11 @@ public class PostgresBakeryDAO implements BakeryDAO{
 
     @Override
     public Dessert getDessertById(Integer dessertId) {
-////        List<Dessert> retreived=template.query("Select \"dessertId\",\"dessertName\" from \"Desserts\"\n" +
-////                "where \"dessertName\"= ?;\n",new BakeryIdMapper(),dessertId);
-//        if(retreived.isEmpty()) return null;
-//
-//        return retreived.get(0);
+
+        Dessert retreived=template.queryForObject("select \"dessertId\", \"dessertName\", \"dessertDescription\" from \"Desserts\" where \"dessertId\"='"+dessertId+"'",new BakeryMapper());
+
+        return retreived;
+
     }
 
 
@@ -57,6 +57,7 @@ public class PostgresBakeryDAO implements BakeryDAO{
             Dessert mappedDessert = new Dessert();
             mappedDessert.setDessertId( resultSet.getInt("dessertId") );
             mappedDessert.setName( resultSet.getString( "dessertName") );
+            mappedDessert.setDescription(resultSet.getString("dessertDescription"));
 
             return mappedDessert;
         }

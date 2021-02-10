@@ -3,6 +3,7 @@ package com.tp.bakery.model;
 public class Dessert {
     Integer dessertId;
     String name;
+    String Description;
 
     public Integer getDessertId() {
         return dessertId;
@@ -18,5 +19,13 @@ public class Dessert {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getDescription() {
+        return Description;
+    }
+
+    public void setDescription(String Description) {
+        this.Description = Description;
     }
 }

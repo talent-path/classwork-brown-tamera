@@ -19,6 +19,7 @@ public class BakeryController {
     public List<Dessert> getAllDesserts(){
         return service.getAllDesserts();
     }
+
     @GetMapping("/dessert/{dessertId}")
     public ResponseEntity getDessertById(@PathVariable Integer dessertId){
       Dessert retrievedDessert=service.getDessertById(dessertId);
