@@ -1,11 +1,15 @@
 package com.tp.bakery.persistence;
 
+import com.tp.bakery.execptions.NullDessertObjectException;
+import com.tp.bakery.execptions.NulllDessertNameException;
 import com.tp.bakery.model.Dessert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.jdbc.core.JdbcTemplate;
+
+
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -25,21 +29,40 @@ public class BakeryPostgresDAOTests {
 
     @Test
    public void addDessertGoldenPathTest(){
+        try {
+            Dessert partialDessert = new Dessert();
+            partialDessert.setName("Pound Cake");
+            partialDessert.setDescription("Moist");
 
-        Dessert partialDessert =new Dessert();
-        partialDessert.setName("Pound Cake");
-        partialDessert.setDescription("Moist");
+            Dessert returned = toTest.addDessert(partialDessert);
 
-        Dessert returned=toTest.addDessert(partialDessert);
+            assertEquals(2, returned.getDessertId());
+            assertEquals("Pound Cake", returned.getName());
+            assertEquals("Moist", returned.getDescription());
 
-        assertEquals( 2, returned.getDessertId() );
-        assertEquals( "Pound Cake", returned.getName() );
-        assertEquals("Moist",returned.getDescription());
+            Dessert dessert = toTest.getDessertById(1);
 
-
-
+            assertEquals(1, dessert.getDessertId());
+            assertEquals("Pineapple Cake", dessert.getName());
+            assertEquals(null, dessert.getDescription());
+        }catch (NullDessertObjectException | NulllDessertNameException e){
+            fail();
+        }
 
 
 
     }
+    @Test
+    public void addDessertNullObjectTest() {
+
+        assertThrows(NullDessertObjectException.class, () -> toTest.addDessert(null));
+    }
+    @Test
+    public void addDessertNullNameTest(){
+        Dessert test= new Dessert();
+        test.setName(null);
+        test.setDescription("Cake with Butter Cream Icing");
+        assertThrows(NulllDessertNameException.class,()->toTest.addDessert(test));
+    }
+
 }

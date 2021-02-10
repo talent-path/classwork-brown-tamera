@@ -1,5 +1,7 @@
 package com.tp.bakery.controller;
 
+import com.tp.bakery.execptions.NullDessertObjectException;
+import com.tp.bakery.execptions.NulllDessertNameException;
 import com.tp.bakery.model.Dessert;
 import com.tp.bakery.service.BakeryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +30,7 @@ public class BakeryController {
 
 
     @PostMapping("/addDessert")
-    public ResponseEntity addDessert(@RequestBody Dessert dessert){
+    public ResponseEntity addDessert(@RequestBody Dessert dessert) throws NullDessertObjectException, NulllDessertNameException {
 
        Dessert newDessert=service.addDessert(dessert);
        return ResponseEntity.ok(newDessert);

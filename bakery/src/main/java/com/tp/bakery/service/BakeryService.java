@@ -1,5 +1,7 @@
 package com.tp.bakery.service;
 
+import com.tp.bakery.execptions.NullDessertObjectException;
+import com.tp.bakery.execptions.NulllDessertNameException;
 import com.tp.bakery.model.Dessert;
 import com.tp.bakery.persistence.BakeryDAO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +17,7 @@ public class BakeryService {
         return dao.getAllDesserts();
     }
 
-    public Dessert addDessert(Dessert dessert) {
+    public Dessert addDessert(Dessert dessert) throws NullDessertObjectException, NulllDessertNameException {
         return dao.addDessert(dessert);
 
     }
