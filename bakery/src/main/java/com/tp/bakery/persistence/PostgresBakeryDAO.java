@@ -1,5 +1,6 @@
 package com.tp.bakery.persistence;
 
+import com.tp.bakery.execptions.NullDessertIdException;
 import com.tp.bakery.execptions.NullDessertObjectException;
 import com.tp.bakery.execptions.NulllDessertNameException;
 import com.tp.bakery.model.Dessert;
@@ -66,7 +67,10 @@ public class PostgresBakeryDAO implements BakeryDAO{
     }
 
     @Override
-    public int deleteDessert(Integer dessertId) {
+    public int deleteDessert(Integer dessertId) throws NullDessertIdException {
+        if(dessertId==null){
+            throw new NullDessertIdException("Cannot delete dessert with null id");
+        }
         int deleted=template.update("delete from \"Desserts\" where \"dessertId\"=?;",dessertId);
         return deleted;
 

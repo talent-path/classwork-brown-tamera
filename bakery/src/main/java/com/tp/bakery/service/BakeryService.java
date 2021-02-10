@@ -1,5 +1,6 @@
 package com.tp.bakery.service;
 
+import com.tp.bakery.execptions.NullDessertIdException;
 import com.tp.bakery.execptions.NullDessertObjectException;
 import com.tp.bakery.execptions.NulllDessertNameException;
 import com.tp.bakery.model.Dessert;
@@ -31,7 +32,7 @@ public class BakeryService {
         return dao.editDessert(dessertId,dessert);
     }
 
-    public int deleteDessert(Integer dessertId) {
+    public int deleteDessert(Integer dessertId) throws NullDessertIdException {
         return dao.deleteDessert(dessertId);
     }
 }

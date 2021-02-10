@@ -1,5 +1,6 @@
 package com.tp.bakery.controller;
 
+import com.tp.bakery.execptions.NullDessertIdException;
 import com.tp.bakery.execptions.NullDessertObjectException;
 import com.tp.bakery.execptions.NulllDessertNameException;
 import com.tp.bakery.model.Dessert;
@@ -41,7 +42,7 @@ public class BakeryController {
 
     }
     @DeleteMapping("/deleteDessert/{dessertId}")
-    public int deleteDessert(@PathVariable Integer dessertId){
+    public int deleteDessert(@PathVariable Integer dessertId) throws NullDessertIdException {
     return service.deleteDessert(dessertId);
 
     }

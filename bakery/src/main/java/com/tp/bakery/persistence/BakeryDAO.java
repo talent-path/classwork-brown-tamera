@@ -1,5 +1,6 @@
 package com.tp.bakery.persistence;
 
+import com.tp.bakery.execptions.NullDessertIdException;
 import com.tp.bakery.execptions.NullDessertObjectException;
 import com.tp.bakery.execptions.NulllDessertNameException;
 import com.tp.bakery.model.Dessert;
@@ -15,5 +16,5 @@ public interface BakeryDAO {
 
     int editDessert(Integer dessertId, Dessert editDessert);
 
-    int deleteDessert(Integer dessertId);
+    int deleteDessert(Integer dessertId) throws NullDessertIdException;
 }

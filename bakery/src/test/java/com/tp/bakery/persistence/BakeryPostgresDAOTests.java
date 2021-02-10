@@ -1,5 +1,6 @@
 package com.tp.bakery.persistence;
 
+import com.tp.bakery.execptions.NullDessertIdException;
 import com.tp.bakery.execptions.NullDessertObjectException;
 import com.tp.bakery.execptions.NulllDessertNameException;
 import com.tp.bakery.model.Dessert;
@@ -64,5 +65,8 @@ public class BakeryPostgresDAOTests {
         test.setDescription("Cake with Butter Cream Icing");
         assertThrows(NulllDessertNameException.class,()->toTest.addDessert(test));
     }
-
+    @Test
+    public void deleteeDessertNullIdTest(){
+        assertThrows(NullDessertIdException.class,()->toTest.deleteDessert(null));
+    }
 }
