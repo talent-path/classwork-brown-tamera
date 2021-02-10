@@ -4,6 +4,7 @@ import com.tp.bakery.model.Dessert;
 import com.tp.bakery.persistence.mappers.BakeryMapper;
 import com.tp.bakery.persistence.mappers.IntegerMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -13,9 +14,10 @@ import java.sql.SQLException;
 import java.util.List;
 
 @Repository
+@Profile({"Application","daoTesting"})
 public class PostgresBakeryDAO implements BakeryDAO{
     @Autowired
-    JdbcTemplate template;
+   private JdbcTemplate template;
 
     @Override
     public List<Dessert> getAllDesserts() {
@@ -25,8 +27,8 @@ public class PostgresBakeryDAO implements BakeryDAO{
 
     @Override
     public Dessert addDessert(Dessert dessert) {
-        Integer dessertId=template.queryForObject("insert into \"Desserts\" (dessertId\", \"dessertName\", \"dessertDescription\")\n" +
-                "values (?,?,?) returning \"dessertId\";",new IntegerMapper("dessertId"),dessert.getName(),dessert.getDescription()) ;
+        Integer dessertId=template.queryForObject("insert into \"Desserts\" (\"dessertName\",\"dessertDescription\") values(?,?) returning \"dessertId\";\n" +
+                "\n",new IntegerMapper("dessertId"),dessert.getName(),dessert.getDescription()) ;
 
         dessert.setDessertId(dessertId);
 
