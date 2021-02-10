@@ -41,8 +41,16 @@ public class PostgresBakeryDAO implements BakeryDAO{
     }
 
     @Override
-    public Dessert editDessert(Dessert dessert, Dessert dessert1) {
-        return null;
+    public int editDessert(Integer dessertId, Dessert editdessert) {
+        int edited=template.update("update \"Desserts\"\n" +
+                        "set \"dessertName\"=?, \"dessertDescription\"=?\n" +
+                        "where \"dessertId\"=?;\n" +
+                        "\n",
+
+                editdessert.getName(),editdessert.getDescription(),dessertId);
+
+        return edited;
+
     }
 
     @Override

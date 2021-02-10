@@ -25,8 +25,8 @@ public class BakeryService {
     }
 
 
-    public Dessert editDessert(Integer dessertId, Dessert dessert) {
-        return dao.editDessert(dessert,dessert);
+    public int editDessert(Integer dessertId, Dessert dessert) {
+        return dao.editDessert(dessertId,dessert);
     }
 
     public Dessert deleteDessert(Integer dessertId) {

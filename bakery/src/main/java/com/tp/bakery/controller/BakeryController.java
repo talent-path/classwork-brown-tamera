@@ -34,10 +34,8 @@ public class BakeryController {
        return ResponseEntity.ok(newDessert);
     }
     @PutMapping("/editDessert/{dessertId}")
-    public ResponseEntity editDessert(@PathVariable Integer dessertId, @RequestBody Dessert dessert){
-
-    Dessert edited=service.editDessert(dessertId,dessert);
-    return ResponseEntity.ok(edited);
+    public int editDessert(@PathVariable Integer dessertId, @RequestBody Dessert dessert){
+       return service.editDessert(dessertId,dessert);
 
     }
     @DeleteMapping("/deleteDessert/{dessertId}")
