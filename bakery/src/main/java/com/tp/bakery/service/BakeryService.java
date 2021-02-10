@@ -29,7 +29,7 @@ public class BakeryService {
         return dao.editDessert(dessertId,dessert);
     }
 
-    public Dessert deleteDessert(Integer dessertId) {
+    public int deleteDessert(Integer dessertId) {
         return dao.deleteDessert(dessertId);
     }
 }

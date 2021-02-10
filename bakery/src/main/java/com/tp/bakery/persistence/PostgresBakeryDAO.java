@@ -54,8 +54,10 @@ public class PostgresBakeryDAO implements BakeryDAO{
     }
 
     @Override
-    public Dessert deleteDessert(Integer dessertId) {
-        return null;
+    public int deleteDessert(Integer dessertId) {
+        int deleted=template.update("delete from \"Desserts\" where \"dessertId\"=?;",dessertId);
+        return deleted;
+
     }
 
 

@@ -39,9 +39,9 @@ public class BakeryController {
 
     }
     @DeleteMapping("/deleteDessert/{dessertId}")
-    public ResponseEntity deleteDessert(@PathVariable Integer dessertId){
-    Dessert deleted=service.deleteDessert(dessertId);
-    return ResponseEntity.ok(deleted);
+    public int deleteDessert(@PathVariable Integer dessertId){
+    return service.deleteDessert(dessertId);
+
     }
 
 

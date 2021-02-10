@@ -13,5 +13,5 @@ public interface BakeryDAO {
 
     int editDessert(Integer dessertId, Dessert editDessert);
 
-    Dessert deleteDessert(Integer dessertId);
+    int deleteDessert(Integer dessertId);
 }
