@@ -5,27 +5,24 @@ import com.tp.bakery.execptions.NullDessertIdException;
 import com.tp.bakery.execptions.NullDessertObjectException;
 import com.tp.bakery.execptions.NulllDessertNameException;
 import com.tp.bakery.model.Dessert;
-import com.tp.bakery.persistence.mappers.BakeryMapper;
+import com.tp.bakery.persistence.mappers.DessertMapper;
 import com.tp.bakery.persistence.mappers.IntegerMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
 
 @Repository
 @Profile({"Application","daoTesting"})
-public class PostgresBakeryDAO implements BakeryDAO{
+public class PostgresDessertDAO implements DessertDAO {
     @Autowired
    private JdbcTemplate template;
 
     @Override
     public List<Dessert> getAllDesserts() {
-        List<Dessert> allDesserts=template.query("select \"dessertId\", \"dessertName\", \"dessertDescription\" from \"Desserts\";",new BakeryMapper());
+        List<Dessert> allDesserts=template.query("select \"dessertId\", \"dessertName\", \"dessertDescription\" from \"Desserts\";",new DessertMapper());
         return allDesserts;
     }
 
@@ -54,7 +51,7 @@ public class PostgresBakeryDAO implements BakeryDAO{
             throw new NullDessertIdException("Cannot get dessert with null Id");
         }
 
-        Dessert retreived=template.queryForObject("select \"dessertId\", \"dessertName\", \"dessertDescription\" from \"Desserts\" where \"dessertId\"='"+dessertId+"'",new BakeryMapper());
+        Dessert retreived=template.queryForObject("select \"dessertId\", \"dessertName\", \"dessertDescription\" from \"Desserts\" where \"dessertId\"='"+dessertId+"'",new DessertMapper());
 
         return retreived;
 

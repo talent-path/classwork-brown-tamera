@@ -8,7 +8,7 @@ import com.tp.bakery.model.Dessert;
 
 import java.util.List;
 
-public interface BakeryDAO {
+public interface DessertDAO {
     List<Dessert> getAllDesserts();
 
     Dessert addDessert(Dessert dessert) throws NullDessertObjectException, NulllDessertNameException, NullDessertDescriptionException;

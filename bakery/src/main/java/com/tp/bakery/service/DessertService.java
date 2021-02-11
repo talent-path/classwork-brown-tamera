@@ -5,15 +5,15 @@ import com.tp.bakery.execptions.NullDessertIdException;
 import com.tp.bakery.execptions.NullDessertObjectException;
 import com.tp.bakery.execptions.NulllDessertNameException;
 import com.tp.bakery.model.Dessert;
-import com.tp.bakery.persistence.BakeryDAO;
+import com.tp.bakery.persistence.DessertDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 @Service
-public class BakeryService {
+public class DessertService {
     @Autowired
-    BakeryDAO dao;
+    DessertDAO dao;
 
     public List<Dessert> getAllDesserts() {
         return dao.getAllDesserts();

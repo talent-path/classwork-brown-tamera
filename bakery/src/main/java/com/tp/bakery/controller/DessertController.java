@@ -5,7 +5,7 @@ import com.tp.bakery.execptions.NullDessertIdException;
 import com.tp.bakery.execptions.NullDessertObjectException;
 import com.tp.bakery.execptions.NulllDessertNameException;
 import com.tp.bakery.model.Dessert;
-import com.tp.bakery.service.BakeryService;
+import com.tp.bakery.service.DessertService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,10 +14,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")
-public class BakeryController {
+public class DessertController {
 
     @Autowired
-    BakeryService service;
+    DessertService service;
 
 @GetMapping("/desserts")
     public List<Dessert> getAllDesserts(){

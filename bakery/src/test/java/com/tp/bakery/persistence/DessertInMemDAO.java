@@ -9,7 +9,7 @@ import java.util.List;
 
 @Repository
 @Profile("ServiceTesting")
-public class BakeryInMemDAO implements BakeryDAO{
+public class DessertInMemDAO implements DessertDAO {
 
     @Override
     public List<Dessert> getAllDesserts() {

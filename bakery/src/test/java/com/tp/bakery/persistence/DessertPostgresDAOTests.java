@@ -16,9 +16,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-public class BakeryPostgresDAOTests {
+public class DessertPostgresDAOTests {
     @Autowired
-    PostgresBakeryDAO toTest;
+    PostgresDessertDAO toTest;
     @Autowired
     JdbcTemplate template;
 
