@@ -5,6 +5,13 @@ public class Dessert {
     String name;
     String Description;
 
+    public Dessert(){}
+
+    public Dessert(Dessert that){
+        this.dessertId=that.dessertId;
+        this.name= that.name;
+        this.Description= that.Description;
+    }
 
     public Integer getDessertId() {
         return dessertId;

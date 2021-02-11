@@ -24,7 +24,7 @@ public class BakeryService {
 
     }
 
-    public Dessert getDessertById(Integer dessertId) {
+    public Dessert getDessertById(Integer dessertId) throws NullDessertIdException {
         return dao.getDessertById(dessertId);
     }
 
@@ -35,5 +35,9 @@ public class BakeryService {
 
     public int deleteDessert(Integer dessertId) throws NullDessertIdException {
         return dao.deleteDessert(dessertId);
+    }
+
+    public void addDessertToMenu() {
+        dao.addDessertToMenu();
     }
 }

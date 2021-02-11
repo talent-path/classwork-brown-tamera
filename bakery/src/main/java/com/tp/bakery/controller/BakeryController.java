@@ -25,7 +25,7 @@ public class BakeryController {
     }
 
     @GetMapping("/dessert/{dessertId}")
-    public ResponseEntity getDessertById(@PathVariable Integer dessertId) {
+    public ResponseEntity getDessertById(@PathVariable Integer dessertId) throws NullDessertIdException {
         Dessert retrievedDessert = service.getDessertById(dessertId);
         return ResponseEntity.ok(retrievedDessert);
     }
@@ -46,6 +46,10 @@ public class BakeryController {
     public int deleteDessert(@PathVariable Integer dessertId) throws NullDessertIdException {
     return service.deleteDessert(dessertId);
 
+    }
+    @PutMapping("/add/{menuId}/{dessertId}")
+    public void addDessertToMenu(@PathVariable Integer menuId, @PathVariable Integer dessertId){
+     service.addDessertToMenu();
     }
 
 

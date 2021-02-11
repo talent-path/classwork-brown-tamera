@@ -49,7 +49,10 @@ public class PostgresBakeryDAO implements BakeryDAO{
     }
 
     @Override
-    public Dessert getDessertById(Integer dessertId) {
+    public Dessert getDessertById(Integer dessertId) throws NullDessertIdException {
+        if(dessertId==null){
+            throw new NullDessertIdException("Cannot get dessert with null Id");
+        }
 
         Dessert retreived=template.queryForObject("select \"dessertId\", \"dessertName\", \"dessertDescription\" from \"Desserts\" where \"dessertId\"='"+dessertId+"'",new BakeryMapper());
 
@@ -92,9 +95,13 @@ public class PostgresBakeryDAO implements BakeryDAO{
 
     }
 
-
-
+    @Override
+    public void addDessertToMenu() {
+        template.execute("");
     }
+
+
+}
 
 
 

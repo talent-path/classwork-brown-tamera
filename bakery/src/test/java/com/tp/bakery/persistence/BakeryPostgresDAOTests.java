@@ -48,7 +48,7 @@ public class BakeryPostgresDAOTests {
             assertEquals(1, dessert.getDessertId());
             assertEquals("Pineapple Cake", dessert.getName());
             assertEquals("Diced Pineapples in cream cheese icing", dessert.getDescription());
-        }catch (NullDessertObjectException | NulllDessertNameException | NullDessertDescriptionException e){
+        }catch (NullDessertObjectException | NulllDessertNameException | NullDessertDescriptionException | NullDessertIdException e){
             fail();
         }
 
@@ -86,6 +86,7 @@ public class BakeryPostgresDAOTests {
     }
     @Test
     public void getAllDesertsGlodenPathTest() {
+        assertEquals(1,toTest.getAllDesserts().size());
         assertEquals(1, toTest.getAllDesserts().get(0).getDessertId());
         assertEquals("Pineapple Cake",toTest.getAllDesserts().get(0).getName());
         assertEquals("Diced Pineapples in cream cheese icing",toTest.getAllDesserts().get(0).getDescription());
@@ -109,7 +110,7 @@ public class BakeryPostgresDAOTests {
         }
     }
     @Test
-    public void editDessertNullId(){
+    public void editDessertNullId() throws NullDessertIdException {
         Dessert test= toTest.getDessertById(1);
         test.setName("Red Velvet Cake");
         test.setDescription("White Icing");

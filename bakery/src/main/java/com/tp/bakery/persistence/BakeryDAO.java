@@ -13,9 +13,11 @@ public interface BakeryDAO {
 
     Dessert addDessert(Dessert dessert) throws NullDessertObjectException, NulllDessertNameException, NullDessertDescriptionException;
 
-    Dessert getDessertById(Integer dessertId);
+    Dessert getDessertById(Integer dessertId) throws NullDessertIdException;
 
     int editDessert(Integer dessertId, Dessert editDessert) throws NullDessertIdException, NullDessertObjectException, NulllDessertNameException, NullDessertDescriptionException;
 
     int deleteDessert(Integer dessertId) throws NullDessertIdException;
+
+    void addDessertToMenu();
 }

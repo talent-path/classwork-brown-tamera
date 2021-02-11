@@ -35,4 +35,9 @@ public class BakeryInMemDAO implements BakeryDAO{
     public int deleteDessert(Integer dessertId) {
         return 0;
     }
+
+    @Override
+    public void addDessertToMenu() {
+
+    }
 }
