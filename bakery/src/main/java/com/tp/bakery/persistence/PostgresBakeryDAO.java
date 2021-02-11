@@ -1,5 +1,6 @@
 package com.tp.bakery.persistence;
 
+import com.tp.bakery.execptions.NullDessertDescriptionException;
 import com.tp.bakery.execptions.NullDessertIdException;
 import com.tp.bakery.execptions.NullDessertObjectException;
 import com.tp.bakery.execptions.NulllDessertNameException;
@@ -29,12 +30,15 @@ public class PostgresBakeryDAO implements BakeryDAO{
     }
 
     @Override
-    public Dessert addDessert(Dessert dessert) throws NullDessertObjectException, NulllDessertNameException {
+    public Dessert addDessert(Dessert dessert) throws NullDessertObjectException, NulllDessertNameException, NullDessertDescriptionException {
         if(dessert==null){
             throw new NullDessertObjectException("Cannot add null dessert object");
         }
         if(dessert.getName()==null){
             throw new NulllDessertNameException("Cannot add dessert with null name");
+        }
+        if(dessert.getDescription()==null){
+            throw new NullDessertDescriptionException("Cannot add a dessert with null description");
         }
         Integer dessertId=template.queryForObject("insert into \"Desserts\" (\"dessertName\",\"dessertDescription\") values(?,?) returning \"dessertId\";\n" +
                 "\n",new IntegerMapper("dessertId"),dessert.getName(),dessert.getDescription()) ;

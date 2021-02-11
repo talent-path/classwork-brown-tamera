@@ -1,5 +1,6 @@
 package com.tp.bakery.controller;
 
+import com.tp.bakery.execptions.NullDessertDescriptionException;
 import com.tp.bakery.execptions.NullDessertIdException;
 import com.tp.bakery.execptions.NullDessertObjectException;
 import com.tp.bakery.execptions.NulllDessertNameException;
@@ -31,7 +32,7 @@ public class BakeryController {
 
 
     @PostMapping("/addDessert")
-    public ResponseEntity addDessert(@RequestBody Dessert dessert) throws NullDessertObjectException, NulllDessertNameException {
+    public ResponseEntity addDessert(@RequestBody Dessert dessert) throws NullDessertObjectException, NulllDessertNameException, NullDessertDescriptionException {
 
        Dessert newDessert=service.addDessert(dessert);
        return ResponseEntity.ok(newDessert);
@@ -46,6 +47,7 @@ public class BakeryController {
     return service.deleteDessert(dessertId);
 
     }
+
 
 
 

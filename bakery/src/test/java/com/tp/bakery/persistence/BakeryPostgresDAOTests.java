@@ -1,5 +1,6 @@
 package com.tp.bakery.persistence;
 
+import com.tp.bakery.execptions.NullDessertDescriptionException;
 import com.tp.bakery.execptions.NullDessertIdException;
 import com.tp.bakery.execptions.NullDessertObjectException;
 import com.tp.bakery.execptions.NulllDessertNameException;
@@ -24,7 +25,8 @@ public class BakeryPostgresDAOTests {
     @BeforeEach
     public void setUp(){
         template.update("truncate \"Menus\",\"Desserts\",\"Orders\",\"DessertMenus\",\"OrderDesserts\" restart identity;");
-        template.update("insert into \"Desserts\" (\"dessertName\") values ('Pineapple Cake');");
+        template.update("insert into \"Desserts\"(\"dessertName\",\"dessertDescription\")\n" +
+                "values('Pineapple Cake','Diced Pineapples in cream cheese icing');");
 
     }
 
@@ -45,12 +47,10 @@ public class BakeryPostgresDAOTests {
 
             assertEquals(1, dessert.getDessertId());
             assertEquals("Pineapple Cake", dessert.getName());
-            assertEquals(null, dessert.getDescription());
-        }catch (NullDessertObjectException | NulllDessertNameException e){
+            assertEquals("Diced Pineapples in cream cheese icing", dessert.getDescription());
+        }catch (NullDessertObjectException | NulllDessertNameException | NullDessertDescriptionException e){
             fail();
         }
-
-
 
     }
     @Test
@@ -66,7 +66,30 @@ public class BakeryPostgresDAOTests {
         assertThrows(NulllDessertNameException.class,()->toTest.addDessert(test));
     }
     @Test
-    public void deleteeDessertNullIdTest(){
+    public void addDessertNullDescriptionTest(){
+        Dessert test= new Dessert();
+        test.setName("Friut Cake");
+        test.setDescription(null);
+        assertThrows(NullDessertDescriptionException.class,()->toTest.addDessert(test));
+    }
+    @Test
+    public void deleteDessertGlodenPathTest() {
+        try{
+            toTest.deleteDessert(1);
+        } catch (NullDessertIdException e){
+            fail();
+        }
+    }
+    @Test
+    public void deleteDessertNullIdTest(){
         assertThrows(NullDessertIdException.class,()->toTest.deleteDessert(null));
     }
+    @Test
+    public void getAllDesertsGlodenPathTest() {
+        assertEquals(1, toTest.getAllDesserts().get(0).getDessertId());
+        assertEquals("Pineapple Cake",toTest.getAllDesserts().get(0).getName());
+        assertEquals("Diced Pineapples in cream cheese icing",toTest.getAllDesserts().get(0).getDescription());
+    }
+
+
 }

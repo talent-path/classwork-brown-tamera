@@ -1,5 +1,6 @@
 package com.tp.bakery.service;
 
+import com.tp.bakery.execptions.NullDessertDescriptionException;
 import com.tp.bakery.execptions.NullDessertIdException;
 import com.tp.bakery.execptions.NullDessertObjectException;
 import com.tp.bakery.execptions.NulllDessertNameException;
@@ -18,7 +19,7 @@ public class BakeryService {
         return dao.getAllDesserts();
     }
 
-    public Dessert addDessert(Dessert dessert) throws NullDessertObjectException, NulllDessertNameException {
+    public Dessert addDessert(Dessert dessert) throws NullDessertObjectException, NulllDessertNameException, NullDessertDescriptionException {
         return dao.addDessert(dessert);
 
     }
