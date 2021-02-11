@@ -1,9 +1,6 @@
 package com.tp.bakery.controller;
 
-import com.tp.bakery.execptions.NullDessertDescriptionException;
-import com.tp.bakery.execptions.NullDessertIdException;
-import com.tp.bakery.execptions.NullDessertObjectException;
-import com.tp.bakery.execptions.NulllDessertNameException;
+import com.tp.bakery.execptions.*;
 import com.tp.bakery.model.Dessert;
 import com.tp.bakery.service.DessertService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +22,7 @@ public class DessertController {
     }
 
     @GetMapping("/dessert/{dessertId}")
-    public ResponseEntity getDessertById(@PathVariable Integer dessertId) throws NullDessertIdException {
+    public ResponseEntity getDessertById(@PathVariable Integer dessertId) throws NullDessertIdException, InvaildDessertIdException {
         Dessert retrievedDessert = service.getDessertById(dessertId);
         return ResponseEntity.ok(retrievedDessert);
     }

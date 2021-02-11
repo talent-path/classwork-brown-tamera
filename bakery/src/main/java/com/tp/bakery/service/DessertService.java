@@ -1,9 +1,6 @@
 package com.tp.bakery.service;
 
-import com.tp.bakery.execptions.NullDessertDescriptionException;
-import com.tp.bakery.execptions.NullDessertIdException;
-import com.tp.bakery.execptions.NullDessertObjectException;
-import com.tp.bakery.execptions.NulllDessertNameException;
+import com.tp.bakery.execptions.*;
 import com.tp.bakery.model.Dessert;
 import com.tp.bakery.persistence.DessertDAO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +21,7 @@ public class DessertService {
 
     }
 
-    public Dessert getDessertById(Integer dessertId) throws NullDessertIdException {
+    public Dessert getDessertById(Integer dessertId) throws NullDessertIdException, InvaildDessertIdException {
         return dao.getDessertById(dessertId);
     }
 
