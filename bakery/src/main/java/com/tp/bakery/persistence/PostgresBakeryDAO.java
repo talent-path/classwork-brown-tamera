@@ -58,7 +58,10 @@ public class PostgresBakeryDAO implements BakeryDAO{
     }
 
     @Override
-    public int editDessert(Integer dessertId, Dessert editdessert) {
+    public int editDessert(Integer dessertId, Dessert editdessert) throws NullDessertIdException {
+        if(dessertId==null){
+            throw new NullDessertIdException("Cannot edit dessert with null id");
+        }
         int edited=template.update("update \"Desserts\"\n" +
                         "set \"dessertName\"=?, \"dessertDescription\"=?\n" +
                         "where \"dessertId\"=?;\n" +

@@ -38,7 +38,7 @@ public class BakeryController {
        return ResponseEntity.ok(newDessert);
     }
     @PutMapping("/editDessert/{dessertId}")
-    public int editDessert(@PathVariable Integer dessertId, @RequestBody Dessert dessert){
+    public int editDessert(@PathVariable Integer dessertId, @RequestBody Dessert dessert) throws NullDessertIdException{
        return service.editDessert(dessertId,dessert);
 
     }

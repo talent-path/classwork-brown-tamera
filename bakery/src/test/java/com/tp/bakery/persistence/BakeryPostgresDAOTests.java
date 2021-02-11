@@ -90,6 +90,31 @@ public class BakeryPostgresDAOTests {
         assertEquals("Pineapple Cake",toTest.getAllDesserts().get(0).getName());
         assertEquals("Diced Pineapples in cream cheese icing",toTest.getAllDesserts().get(0).getDescription());
     }
+    @Test
+    public void editDessertGlodenPathTest() {
+        try {
+            Dessert edit = toTest.getDessertById(1);
+            edit.setName("Yellow Cake");
+            edit.setDescription("White Icing");
+
+            int returned = toTest.editDessert(edit.getDessertId(), edit);
+
+            assertEquals(1, returned);
+            assertEquals("Yellow Cake", toTest.getAllDesserts().get(0).getName());
+            assertEquals("White Icing", toTest.getAllDesserts().get(0).getDescription());
+
+
+        } catch (NullDessertIdException e) {
+            fail();
+        }
+    }
+    @Test
+    public void editDessertNullId(){
+        Dessert test= toTest.getDessertById(1);
+        test.setName("Red Velvet Cake");
+        test.setDescription("White Icing");
+        assertThrows(NullDessertIdException.class,()->toTest.editDessert(null,test));
+    }
 
 
 }

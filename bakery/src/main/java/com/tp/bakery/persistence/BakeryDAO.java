@@ -15,7 +15,7 @@ public interface BakeryDAO {
 
     Dessert getDessertById(Integer dessertId);
 
-    int editDessert(Integer dessertId, Dessert editDessert);
+    int editDessert(Integer dessertId, Dessert editDessert) throws NullDessertIdException;
 
     int deleteDessert(Integer dessertId) throws NullDessertIdException;
 }
