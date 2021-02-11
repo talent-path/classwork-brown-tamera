@@ -29,7 +29,7 @@ public class BakeryService {
     }
 
 
-    public int editDessert(Integer dessertId, Dessert dessert) throws NullDessertIdException {
+    public int editDessert(Integer dessertId, Dessert dessert) throws NullDessertIdException, NullDessertObjectException,NulllDessertNameException, NullDessertDescriptionException {
         return dao.editDessert(dessertId,dessert);
     }
 

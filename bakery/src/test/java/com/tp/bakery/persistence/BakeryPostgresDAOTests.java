@@ -104,7 +104,7 @@ public class BakeryPostgresDAOTests {
             assertEquals("White Icing", toTest.getAllDesserts().get(0).getDescription());
 
 
-        } catch (NullDessertIdException e) {
+        } catch (NullDessertIdException | NullDessertObjectException | NulllDessertNameException | NullDessertDescriptionException e) {
             fail();
         }
     }
@@ -114,6 +114,24 @@ public class BakeryPostgresDAOTests {
         test.setName("Red Velvet Cake");
         test.setDescription("White Icing");
         assertThrows(NullDessertIdException.class,()->toTest.editDessert(null,test));
+    }
+    @Test
+    public void editDessertNullDessertObject(){
+        assertThrows(NullDessertObjectException.class,()->toTest.editDessert(1,null));
+    }
+    @Test
+    public void editDessertNullDessertName(){
+        Dessert test=toTest.getAllDesserts().get(0);
+        test.setName(null);
+        test.setDescription("Good");
+        assertThrows(NulllDessertNameException.class,()->toTest.editDessert(1,test));
+    }
+    @Test
+    public void editDessertNullDescription(){
+        Dessert test=toTest.getAllDesserts().get(0);
+        test.setName("Strawberry Shortcake");
+        test.setDescription(null);
+        assertThrows(NullDessertDescriptionException.class,()->toTest.editDessert(1,test));
     }
 
 
