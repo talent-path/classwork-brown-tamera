@@ -105,12 +105,14 @@ public class DessertPostgresDAOTests {
             Dessert edit = toTest.getDessertById(1);
             edit.setName("Yellow Cake");
             edit.setDescription("White Icing");
+            edit.setPrice(24.00);
 
             int returned = toTest.editDessert(edit.getDessertId(), edit);
 
             assertEquals(1, returned);
             assertEquals("Yellow Cake", toTest.getAllDesserts().get(0).getName());
             assertEquals("White Icing", toTest.getAllDesserts().get(0).getDescription());
+            assertEquals(24.00,toTest.getAllDesserts().get(0).getPrice());
 
 
         } catch (NullDessertIdException | NullDessertObjectException | NulllDessertNameException | NullDessertDescriptionException | NullDessertPriceException e) {
