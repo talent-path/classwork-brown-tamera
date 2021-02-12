@@ -5,7 +5,6 @@ import java.util.List;
 public class Menu {
     Integer menuId;
     String menuName;
-    List<Dessert> allDessert;
 
     public Integer getMenuId() {
         return menuId;
@@ -23,11 +22,4 @@ public class Menu {
         this.menuName = menuName;
     }
 
-    public List<Dessert> getAllDessert() {
-        return allDessert;
-    }
-
-    public void setAllDessert(List<Dessert> allDessert) {
-        this.allDessert = allDessert;
-    }
 }
