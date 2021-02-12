@@ -61,11 +61,29 @@ public class BakeryServiceTests {
             assertEquals(2,validate2.getDessertId());
             assertEquals("Fruit Cake",validate2.getName());
             assertEquals("Made with fresh fruit",validate2.getDescription());
-            
+
 
         } catch (NullDessertObjectException | NullDessertDescriptionException | NulllDessertNameException | InvaildDessertIdException | NullDessertIdException e) {
             fail();
 
         }
+    }
+    @Test
+    public void addDesertNullObjectTest(){
+        assertThrows(NullDessertObjectException.class,()-> toTest.addDessert(null));
+    }
+    @Test
+    public void addDessertNullNameTest(){
+        Dessert test = new Dessert();
+        test.setName(null);
+        test.setDescription("Sweet Icing");
+        assertThrows(NulllDessertNameException.class,()->toTest.addDessert(test));
+    }
+    @Test
+    public void addDessertNullDescriptionTest(){
+        Dessert test= new Dessert();
+        test.setName("Chocolate Cake");
+        test.setDescription(null);
+        assertThrows(NullDessertDescriptionException.class,()->toTest.addDessert(test));
     }
 }
