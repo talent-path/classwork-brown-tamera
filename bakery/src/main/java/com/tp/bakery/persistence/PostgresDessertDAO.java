@@ -17,12 +17,13 @@ import java.util.List;
 @Repository
 @Profile({"Application","daoTesting"})
 public class PostgresDessertDAO implements DessertDAO {
+
     @Autowired
    private JdbcTemplate template;
 
     @Override
     public List<Dessert> getAllDesserts() {
-        List<Dessert> allDesserts=template.query("select \"dessertId\", \"dessertName\", \"dessertDescription\" from \"Desserts\";",new DessertMapper());
+        List<Dessert> allDesserts=template.query("select \"dessertId\",\"dessertName\",\"dessertDescription\", \"dessertPrice\" from \"Desserts\";",new DessertMapper());
         return allDesserts;
     }
 
@@ -37,8 +38,8 @@ public class PostgresDessertDAO implements DessertDAO {
         if(dessert.getDescription()==null){
             throw new NullDessertDescriptionException("Cannot add a dessert with null description");
         }
-        Integer dessertId=template.queryForObject("insert into \"Desserts\" (\"dessertName\",\"dessertDescription\") values(?,?) returning \"dessertId\";\n" +
-                "\n",new IntegerMapper("dessertId"),dessert.getName(),dessert.getDescription()) ;
+        Integer dessertId=template.queryForObject("insert into \"Desserts\" (\"dessertName\",\"dessertDescription\",\"dessertPrice\") values(?,?,?) returning \"dessertId\";\n" +
+                "\n",new IntegerMapper("dessertId"),dessert.getName(),dessert.getDescription(),dessert.getPrice()) ;
 
         dessert.setDessertId(dessertId);
 
@@ -51,7 +52,7 @@ public class PostgresDessertDAO implements DessertDAO {
             throw new NullDessertIdException("Cannot get dessert with null Id");
         }
 
-        Dessert retreived=template.queryForObject("select \"dessertId\", \"dessertName\", \"dessertDescription\" from \"Desserts\" where \"dessertId\"='"+dessertId+"'",new DessertMapper());
+        Dessert retreived=template.queryForObject("select \"dessertId\", \"dessertName\", \"dessertDescription\", \"dessertPrice\" from \"Desserts\" where \"dessertId\"='"+dessertId+"'",new DessertMapper());
 
         return retreived;
 
@@ -72,11 +73,10 @@ public class PostgresDessertDAO implements DessertDAO {
             throw new NulllDessertNameException("Cannot edit dessert with null name");
         }
         int edited=template.update("update \"Desserts\"\n" +
-                        "set \"dessertName\"=?, \"dessertDescription\"=?\n" +
-                        "where \"dessertId\"=?;\n" +
-                        "\n",
+                "set \"dessertName\"=?, \"dessertDescription\"=?, \"dessertPrice\"=? \n" +
+                "where \"dessertId\"=?;",
 
-                editdessert.getName(),editdessert.getDescription(),dessertId);
+                editdessert.getName(),editdessert.getDescription(),editdessert.getPrice(),dessertId);
 
         return edited;
 

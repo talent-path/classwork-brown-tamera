@@ -1,7 +1,7 @@
 package com.tp.bakery.controller;
 
 import com.tp.bakery.execptions.*;
-import com.tp.bakery.model.Dessert;
+import com.tp.bakery.model.*;
 import com.tp.bakery.service.DessertService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

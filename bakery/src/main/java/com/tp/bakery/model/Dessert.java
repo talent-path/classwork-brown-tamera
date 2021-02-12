@@ -4,6 +4,9 @@ public class Dessert {
     Integer dessertId;
     String name;
     String Description;
+    Double price;
+
+
 
     public Dessert(){}
 
@@ -11,6 +14,7 @@ public class Dessert {
         this.dessertId=that.dessertId;
         this.name= that.name;
         this.Description= that.Description;
+        this.price=that.price;
     }
 
     public Integer getDessertId() {
@@ -35,5 +39,13 @@ public class Dessert {
 
     public void setDescription(String Description) {
         this.Description = Description;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
     }
 }

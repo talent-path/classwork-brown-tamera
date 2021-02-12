@@ -14,6 +14,7 @@ import java.sql.SQLException;
             mappedDessert.setDessertId( resultSet.getInt("dessertId") );
             mappedDessert.setName( resultSet.getString( "dessertName") );
             mappedDessert.setDescription(resultSet.getString("dessertDescription"));
+            mappedDessert.setPrice(resultSet.getDouble("dessertPrice"));
 
             return mappedDessert;
         }
