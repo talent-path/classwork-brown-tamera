@@ -16,7 +16,7 @@ public class DessertService {
         return dao.getAllDesserts();
     }
 
-    public Dessert addDessert(Dessert dessert) throws NullDessertObjectException, NulllDessertNameException, NullDessertDescriptionException {
+    public Dessert addDessert(Dessert dessert) throws NullDessertObjectException, NulllDessertNameException, NullDessertDescriptionException, NullDessertPriceException {
         return dao.addDessert(dessert);
 
     }
@@ -26,7 +26,7 @@ public class DessertService {
     }
 
 
-    public int editDessert(Integer dessertId, Dessert dessert) throws NullDessertIdException, NullDessertObjectException,NulllDessertNameException, NullDessertDescriptionException {
+    public int editDessert(Integer dessertId, Dessert dessert) throws NullDessertIdException, NullDessertObjectException,NulllDessertNameException, NullDessertDescriptionException,NullDessertPriceException {
         return dao.editDessert(dessertId,dessert);
     }
 

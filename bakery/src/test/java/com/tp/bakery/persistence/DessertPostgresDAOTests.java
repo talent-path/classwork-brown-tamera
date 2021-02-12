@@ -1,9 +1,6 @@
 package com.tp.bakery.persistence;
 
-import com.tp.bakery.execptions.NullDessertDescriptionException;
-import com.tp.bakery.execptions.NullDessertIdException;
-import com.tp.bakery.execptions.NullDessertObjectException;
-import com.tp.bakery.execptions.NulllDessertNameException;
+import com.tp.bakery.execptions.*;
 import com.tp.bakery.model.Dessert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -25,8 +22,8 @@ public class DessertPostgresDAOTests {
     @BeforeEach
     public void setUp(){
         template.update("truncate \"Menus\",\"Desserts\",\"Orders\",\"DessertMenus\",\"OrderDesserts\" restart identity;");
-        template.update("insert into \"Desserts\"(\"dessertName\",\"dessertDescription\")\n" +
-                "values('Pineapple Cake','Diced Pineapples in cream cheese icing');");
+        template.update("insert into \"Desserts\"(\"dessertName\",\"dessertDescription\",\"dessertPrice\")\n" +
+                "values('Pineapple Cake','Diced Pineapples in cream cheese icing','16.00');");
 
     }
 
@@ -36,19 +33,22 @@ public class DessertPostgresDAOTests {
             Dessert partialDessert = new Dessert();
             partialDessert.setName("Pound Cake");
             partialDessert.setDescription("Moist");
+            partialDessert.setPrice(25.00);
 
             Dessert returned = toTest.addDessert(partialDessert);
 
             assertEquals(2, returned.getDessertId());
             assertEquals("Pound Cake", returned.getName());
             assertEquals("Moist", returned.getDescription());
+            assertEquals(25.00,returned.getPrice());
 
             Dessert dessert = toTest.getDessertById(1);
 
             assertEquals(1, dessert.getDessertId());
             assertEquals("Pineapple Cake", dessert.getName());
             assertEquals("Diced Pineapples in cream cheese icing", dessert.getDescription());
-        }catch (NullDessertObjectException | NulllDessertNameException | NullDessertDescriptionException | NullDessertIdException e){
+            assertEquals(16.00,dessert.getPrice());
+        }catch (NullDessertObjectException | NulllDessertNameException | NullDessertDescriptionException | NullDessertIdException | NullDessertPriceException e){
             fail();
         }
 
@@ -71,6 +71,14 @@ public class DessertPostgresDAOTests {
         test.setName("Friut Cake");
         test.setDescription(null);
         assertThrows(NullDessertDescriptionException.class,()->toTest.addDessert(test));
+    }
+    @Test
+    public void addDessertNullPriceTest(){
+        Dessert test=new Dessert();
+        test.setName("Strawberry Cheesecake");
+        test.setDescription("Fresh Strawberries");
+        test.setPrice(null);
+        assertThrows(NullDessertPriceException.class,()->toTest.addDessert(test));
     }
     @Test
     public void deleteDessertGlodenPathTest() {
@@ -105,7 +113,7 @@ public class DessertPostgresDAOTests {
             assertEquals("White Icing", toTest.getAllDesserts().get(0).getDescription());
 
 
-        } catch (NullDessertIdException | NullDessertObjectException | NulllDessertNameException | NullDessertDescriptionException e) {
+        } catch (NullDessertIdException | NullDessertObjectException | NulllDessertNameException | NullDessertDescriptionException | NullDessertPriceException e) {
             fail();
         }
     }
@@ -133,6 +141,14 @@ public class DessertPostgresDAOTests {
         test.setName("Strawberry Shortcake");
         test.setDescription(null);
         assertThrows(NullDessertDescriptionException.class,()->toTest.editDessert(1,test));
+    }
+    @Test
+    public void editDeesertNullPrice(){
+        Dessert test=new Dessert();
+        test.setName("Cookie Cake");
+        test.setDescription("Yummy");
+        test.setPrice(null);
+        assertThrows(NullDessertPriceException.class,()->toTest.editDessert(1,test));
     }
 
 

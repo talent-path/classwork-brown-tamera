@@ -29,13 +29,13 @@ public class DessertController {
 
 
     @PostMapping("/addDessert")
-    public ResponseEntity addDessert(@RequestBody Dessert dessert) throws NullDessertObjectException, NulllDessertNameException, NullDessertDescriptionException {
+    public ResponseEntity addDessert(@RequestBody Dessert dessert) throws NullDessertObjectException, NulllDessertNameException, NullDessertDescriptionException, NullDessertPriceException {
 
        Dessert newDessert=service.addDessert(dessert);
        return ResponseEntity.ok(newDessert);
     }
     @PutMapping("/editDessert/{dessertId}")
-    public int editDessert(@PathVariable Integer dessertId, @RequestBody Dessert dessert) throws NullDessertIdException, NullDessertObjectException, NulllDessertNameException, NullDessertDescriptionException{
+    public int editDessert(@PathVariable Integer dessertId, @RequestBody Dessert dessert) throws NullDessertIdException, NullDessertObjectException, NulllDessertNameException, NullDessertDescriptionException, NullDessertPriceException{
        return service.editDessert(dessertId,dessert);
 
     }
