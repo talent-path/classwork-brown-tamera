@@ -78,7 +78,7 @@ public class DessertInMemDAO implements DessertDAO {
     }
 
     @Override
-    public void addDessertToMenu() {
+    public void addDessertToMenu(Integer menuId, Integer dessertId) {
 
     }
 }

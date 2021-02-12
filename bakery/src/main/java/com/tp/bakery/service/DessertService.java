@@ -34,7 +34,7 @@ public class DessertService {
         return dao.deleteDessert(dessertId);
     }
 
-    public void addDessertToMenu() {
-        dao.addDessertToMenu();
+    public void addDessertToMenu(Integer menuId, Integer dessertId) {
+        dao.addDessertToMenu(menuId,dessertId);
     }
 }

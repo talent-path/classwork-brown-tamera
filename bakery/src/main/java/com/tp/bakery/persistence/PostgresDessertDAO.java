@@ -93,8 +93,11 @@ public class PostgresDessertDAO implements DessertDAO {
     }
 
     @Override
-    public void addDessertToMenu() {
-        template.execute("");
+    public void addDessertToMenu(Integer menuId, Integer dessertId) {
+        template.update("insert into \"DessertMenus\"(\"menuId\",\"dessertId\")\n" +
+                "select \"menuId\",\"dessertId\" from \"DessertsHelper\"\n" +
+                "where \"menuId\"=? and \"dessertId\"=?;\n" +
+                "\n", menuId,dessertId );
     }
 
 

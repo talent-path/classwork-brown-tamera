@@ -46,7 +46,7 @@ public class DessertController {
     }
     @PutMapping("/add/{menuId}/{dessertId}")
     public void addDessertToMenu(@PathVariable Integer menuId, @PathVariable Integer dessertId){
-     service.addDessertToMenu();
+     service.addDessertToMenu(menuId,dessertId);
     }
 
 
