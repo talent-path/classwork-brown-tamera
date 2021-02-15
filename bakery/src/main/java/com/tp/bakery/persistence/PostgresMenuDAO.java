@@ -32,8 +32,7 @@ public class PostgresMenuDAO implements MenuDAO {
 
     @Override
     public Menu viewMenuById(Integer menuId) {
-        Menu retrieved=template.queryForObject("select \"Menus\".\"menuId\",\"menuName\",\"Desserts\".\"dessertId\",\"Desserts\".\"dessertName\",\"Desserts\".\"dessertDescription\", \"Desserts\".\"dessertPrice\" from \"DessertMenus\", \"Desserts\",\"Menus\"\n" +
-                "where \"Menus\".\"menuId\"="+menuId+";",new MenuMapper());
+        Menu retrieved=template.queryForObject("select * from \"DessertsHelper\" where \"menuId\"="+menuId+";\n",new MenuMapper());
         return retrieved;
     }
 }
