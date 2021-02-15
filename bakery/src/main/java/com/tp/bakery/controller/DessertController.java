@@ -48,6 +48,12 @@ public class DessertController {
     public void addDessertToMenu(@PathVariable Integer menuId, @PathVariable Integer dessertId){
      service.addDessertToMenu(menuId,dessertId);
     }
+    @PostMapping("/buy/{dessertId}/{quantityNum}")
+    public ResponseEntity buyDessert(@PathVariable Integer dessertId, @PathVariable int quantityNum){
+
+        service.buyDessert(dessertId,quantityNum);
+
+    }
 
 
 

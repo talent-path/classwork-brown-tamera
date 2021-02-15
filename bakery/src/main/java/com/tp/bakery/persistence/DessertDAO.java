@@ -17,4 +17,6 @@ public interface DessertDAO {
     int deleteDessert(Integer dessertId) throws NullDessertIdException;
 
     void addDessertToMenu(Integer menuId, Integer dessertId);
+
+    void buyDessert(Integer dessertId, Integer quantityNum);
 }

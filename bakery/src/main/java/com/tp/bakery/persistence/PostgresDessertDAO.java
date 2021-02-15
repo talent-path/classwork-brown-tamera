@@ -4,6 +4,7 @@ import com.tp.bakery.execptions.*;
 import com.tp.bakery.model.Dessert;
 import com.tp.bakery.persistence.mappers.DessertMapper;
 import com.tp.bakery.persistence.mappers.IntegerMapper;
+import com.tp.bakery.persistence.mappers.OrderMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -101,6 +102,11 @@ public class PostgresDessertDAO implements DessertDAO {
                 "select \"menuId\",\"dessertId\" from \"DessertsHelper\"\n" +
                 "where \"menuId\"=? and \"dessertId\"=?;\n" +
                 "\n", menuId,dessertId );
+    }
+
+    @Override
+    public void buyDessert(Integer dessertId, Integer quantityNum) {
+        template.update("", new OrderMapper());
     }
 
 

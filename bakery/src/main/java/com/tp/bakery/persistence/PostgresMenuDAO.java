@@ -4,6 +4,7 @@ import com.tp.bakery.model.Menu;
 import com.tp.bakery.persistence.mappers.DessertMapper;
 import com.tp.bakery.persistence.mappers.IntegerMapper;
 import com.tp.bakery.persistence.mappers.MenuMapper;
+import com.tp.bakery.persistence.mappers.partialMenuMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -18,7 +19,7 @@ public class PostgresMenuDAO implements MenuDAO {
 
     @Override
     public List<Menu> getAllMenus() {
-        List<Menu> allMenus=template.query("select \"menuId\",\"menuName\" from \"Menus\";",new MenuMapper());
+        List<Menu> allMenus=template.query("select \"menuId\",\"menuName\" from \"Menus\";",new partialMenuMapper());
         return allMenus;
     }
 

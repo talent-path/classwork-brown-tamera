@@ -5,8 +5,8 @@ import com.tp.bakery.model.Dessert;
 import com.tp.bakery.model.Menu;
 import com.tp.bakery.persistence.DessertDAO;
 import com.tp.bakery.persistence.MenuDAO;
+import com.tp.bakery.persistence.OrderDAO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,6 +17,8 @@ public class BakeryService {
     DessertDAO Dessertdao;
     @Autowired
     MenuDAO Menudao;
+    @Autowired
+    OrderDAO Orderdao;
 
     public List<Dessert> getAllDesserts() {
         return Dessertdao.getAllDesserts();
@@ -53,5 +55,10 @@ public class BakeryService {
 
     public Menu viewMenusById(Integer menuId) {
         return Menudao.viewMenuById(menuId);
+    }
+
+
+    public void buyDessert(Integer dessertId, Integer quantityNum) {
+         Dessertdao.buyDessert(dessertId,quantityNum);
     }
 }
