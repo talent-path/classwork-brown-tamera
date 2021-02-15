@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 @Service
 public class BakeryService {
     @Autowired
@@ -47,5 +48,9 @@ public class BakeryService {
 
     public Menu addMenu(Menu newMenu) {
         return Menudao.addMenu(newMenu);
+    }
+
+    public Menu viewMenusById(Integer menuId) {
+        return Menudao.viewMenuById(menuId);
     }
 }

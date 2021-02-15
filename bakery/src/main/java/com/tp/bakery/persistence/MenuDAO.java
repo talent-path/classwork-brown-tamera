@@ -8,4 +8,6 @@ public interface MenuDAO {
     public List<Menu> getAllMenus();
 
     Menu addMenu(Menu newMenu);
+
+    Menu viewMenuById(Integer menuId);
 }

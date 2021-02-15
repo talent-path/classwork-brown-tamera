@@ -4,10 +4,7 @@ import com.tp.bakery.model.Menu;
 import com.tp.bakery.service.BakeryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,6 +18,11 @@ public class MenuController {
     @GetMapping("/menus")
     List<Menu> getAllMenus(){
         return service.getAllMenus();
+    }
+    @GetMapping("/menu/{menuId}")
+    public Menu viewMenuById(@PathVariable Integer menuId){
+        return service.viewMenusById(menuId);
+
     }
     @PostMapping("/addMenu")
     public ResponseEntity addMenu(Menu newMenu){
