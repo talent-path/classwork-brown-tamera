@@ -2,7 +2,7 @@ package com.tp.bakery.controller;
 
 import com.tp.bakery.execptions.*;
 import com.tp.bakery.model.*;
-import com.tp.bakery.service.DessertService;
+import com.tp.bakery.service.BakeryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +14,7 @@ import java.util.List;
 public class DessertController {
 
     @Autowired
-    DessertService service;
+    BakeryService service;
 
 @GetMapping("/desserts")
     public List<Dessert> getAllDesserts(){

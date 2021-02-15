@@ -2,39 +2,50 @@ package com.tp.bakery.service;
 
 import com.tp.bakery.execptions.*;
 import com.tp.bakery.model.Dessert;
+import com.tp.bakery.model.Menu;
 import com.tp.bakery.persistence.DessertDAO;
+import com.tp.bakery.persistence.MenuDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 @Service
-public class DessertService {
+public class BakeryService {
     @Autowired
-    DessertDAO dao;
+    DessertDAO Dessertdao;
+    @Autowired
+    MenuDAO Menudao;
 
     public List<Dessert> getAllDesserts() {
-        return dao.getAllDesserts();
+        return Dessertdao.getAllDesserts();
     }
 
     public Dessert addDessert(Dessert dessert) throws NullDessertObjectException, NulllDessertNameException, NullDessertDescriptionException, NullDessertPriceException {
-        return dao.addDessert(dessert);
+        return Dessertdao.addDessert(dessert);
 
     }
 
     public Dessert getDessertById(Integer dessertId) throws NullDessertIdException, InvaildDessertIdException {
-        return dao.getDessertById(dessertId);
+        return Dessertdao.getDessertById(dessertId);
     }
 
 
     public int editDessert(Integer dessertId, Dessert dessert) throws NullDessertIdException, NullDessertObjectException,NulllDessertNameException, NullDessertDescriptionException,NullDessertPriceException {
-        return dao.editDessert(dessertId,dessert);
+        return Dessertdao.editDessert(dessertId,dessert);
     }
 
     public int deleteDessert(Integer dessertId) throws NullDessertIdException {
-        return dao.deleteDessert(dessertId);
+        return Dessertdao.deleteDessert(dessertId);
     }
 
     public void addDessertToMenu(Integer menuId, Integer dessertId) {
-        dao.addDessertToMenu(menuId,dessertId);
+        Dessertdao.addDessertToMenu(menuId,dessertId);
+    }
+    public List<Menu> getAllMenus() {
+        return Menudao.getAllMenus();
+    }
+
+    public Menu addMenu(Menu newMenu) {
+        return Menudao.addMenu(newMenu);
     }
 }

@@ -1,7 +1,7 @@
 package com.tp.bakery.controller;
 
 import com.tp.bakery.model.Menu;
-import com.tp.bakery.service.MenuService;
+import com.tp.bakery.service.BakeryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +16,7 @@ import java.util.List;
 public class MenuController {
 
     @Autowired
-    MenuService service;
+    BakeryService service;
 
     @GetMapping("/menus")
     List<Menu> getAllMenus(){
@@ -27,4 +27,5 @@ public class MenuController {
         Menu menu= service.addMenu(newMenu);
         return ResponseEntity.ok(menu);
     }
+    
 }
