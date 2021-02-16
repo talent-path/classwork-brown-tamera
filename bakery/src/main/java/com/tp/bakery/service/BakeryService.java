@@ -58,7 +58,8 @@ public class BakeryService {
     }
 
 
-    public void buyDessert(Integer dessertId, Integer quantityNum) {
+    public Dessert buyDessert(Integer dessertId, Integer quantityNum) {
          Dessertdao.buyDessert(dessertId,quantityNum);
+        return null;
     }
 }

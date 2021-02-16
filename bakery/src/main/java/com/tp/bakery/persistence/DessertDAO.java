@@ -18,5 +18,5 @@ public interface DessertDAO {
 
     void addDessertToMenu(Integer menuId, Integer dessertId);
 
-    void buyDessert(Integer dessertId, Integer quantityNum);
+    Dessert buyDessert(Integer dessertId, Integer quantityNum);
 }

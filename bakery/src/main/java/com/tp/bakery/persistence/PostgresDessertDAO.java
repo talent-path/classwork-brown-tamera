@@ -105,8 +105,9 @@ public class PostgresDessertDAO implements DessertDAO {
     }
 
     @Override
-    public void buyDessert(Integer dessertId, Integer quantityNum) {
-        template.update("", new OrderMapper());
+    public Dessert buyDessert(Integer dessertId, Integer quantityNum) {
+        //Integer input=template.queryForObject("", new OrderMapper());
+        return null;
     }
 
 

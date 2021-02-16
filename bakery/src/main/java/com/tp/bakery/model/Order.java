@@ -1,5 +1,6 @@
 package com.tp.bakery.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Order {
@@ -7,6 +8,18 @@ public class Order {
     String email;
     List<Dessert> BagItems;
     Double totalPrice;
+
+    public Order(){};
+
+    public Order(Order that){
+        this.name= that.name;
+        this.email= that.email;
+        this.BagItems=new ArrayList<>();
+        for(Dessert toCopy : that.BagItems){
+            this.BagItems.add(toCopy);
+        }
+        this.totalPrice=that.totalPrice;
+    }
 
     public String getName() {
         return name;

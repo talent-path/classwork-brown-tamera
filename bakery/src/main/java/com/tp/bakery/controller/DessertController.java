@@ -51,7 +51,8 @@ public class DessertController {
     @PostMapping("/buy/{dessertId}/{quantityNum}")
     public ResponseEntity buyDessert(@PathVariable Integer dessertId, @PathVariable int quantityNum){
 
-        service.buyDessert(dessertId,quantityNum);
+        Dessert bought=service.buyDessert(dessertId,quantityNum);
+        return ResponseEntity.ok(bought);
 
     }
 
