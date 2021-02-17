@@ -1,5 +1,6 @@
 var intersection = function(nums1, nums2) {
     
+    document.get
     let nums1Set=new Set(nums1);
    let nums2Set=new Set(nums2);
    
@@ -11,13 +12,5 @@ var intersection = function(nums1, nums2) {
        }
        
    }
-   return Resultarray;
-};
-
-
-// let nums1Set=new Set(num1);
-// let nums2Set=new Set(num2);
-
-// let result= new Set([...numsSet1].filter(x=>numsSet2.has(x)));
-
-// return result;
+   console.log(Resultarray);
+}

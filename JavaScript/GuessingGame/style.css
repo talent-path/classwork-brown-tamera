@@ -1,0 +1,30 @@
+#box1{
+    width: 75px;
+    height: 60px;
+    border: 6px solid rgb(0, 3, 5);
+    display: inline-block;
+    
+
+}
+#box2{
+    width: 75px;
+    height: 60px;
+    border: 6px solid #030B11;
+    display: inline-block;
+   
+
+}
+#box3{
+    width: 75px;
+    height: 60px;
+    border: 6px solid #030B11;
+    display: inline-block;
+    
+}
+#box4{
+    width: 75px;
+    height: 60px;
+    border: 6px solid #030B11;
+    display: inline-block;
+
+}
