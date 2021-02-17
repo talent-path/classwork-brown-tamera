@@ -1,0 +1,19 @@
+h1, p{
+    text-align: center;
+}
+#borad{
+
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows:100px 100px 100px ;
+    text-align: center;
+    border: 5px solid black;
+}
+#reset{
+    text-align: center;
+    font-size: 20px;
+    border: 1px solid black;
+    height: 45px;
+    width: 150px;
+    margin: 10px;
+}
