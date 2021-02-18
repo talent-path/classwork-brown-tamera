@@ -1,56 +1,67 @@
 
+let secretNum=[];
 const GenerateNumber=function(){
-    const digits = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-
-    let answer = digits.splice( Math.trunc(Math.random() * (digits.length - 1) + 1 ), 1)[0];
-  
-    for( let i = 1; i < 4; i++ ){
-  
-      let randomIndex = Math.trunc(Math.random() * digits.length);
-  
-      let digit = digits.splice(randomIndex,1)[0];
-      answer *= 10;
-      answer += digit;
-      answer.toString();
-  
-      //digits.splice(  )
-  
-  
+ //Generates 4 digit unique number
+     //   let arr = [];
+        while(secretNum.length < 4){
+            let r = Math.floor(Math.random() * 10);
+            if(secretNum.indexOf(r) === -1) {
+                secretNum.push(r);
+            }
+        } 
+        console.log(secretNum);
+        return secretNum.join("");
     }
-    console.log(answer);
   
-    return answer;
-  
-  }
   
 
 let MakeGuess=function(){
 
-    let guessedNumber=document.getElementById('userInput').value;
+    let guessedNumber=Number.parseInt(document.getElementById('userInput').value);
     //convert input to Array
     let userInputArray=Array.from(String(guessedNumber),Number);
 
-   
+    verify(secretNum,userInputArray);
+    
     FillBoxes(guessedNumber);
-
-    //green #00FF00
-    //red #D3212D
-    //yellow #FFFF4D
-
     
 }
+
+function verify(secretNum,userInputArray){
+        for(let i=0;i<4;i++){
+       
+       
+            //correct
+            if(userInputArray[i]===secretNum[i]){
+              
+                document.getElementById("box"+(i+1)).style.backgroundColor='#1EB300';
+               // console.log(document.getElementById("box"(i+1)));
+                
+            }
+            else if( secretNum.includes(userInputArray[i])){
+                document.getElementById("box"+(i+1)).style.backgroundColor='#FFFF4D';
+            }
+            else{
+                document.getElementById("box"+(i+1)).style.backgroundColor='#D3212D';
+            
+            }
+        }
+    }
+
 
 function FillBoxes(guessedNumber){
 
 document.getElementById('box1').innerHTML=Math.trunc(Math.trunc(guessedNumber/1000));
 document.getElementById('box2').innerHTML=Math.trunc(guessedNumber%1000/100);
-document.getElementById('box3').innerHTML=Math.trunc(guessedNumber%1000/10);
+document.getElementById('box3').innerHTML=Math.trunc(guessedNumber%100/10);
 document.getElementById('box4').innerHTML=Math.trunc(guessedNumber%10);
 }
+
 function reset(){
-    for(let i=0;i<5;i++){
-        document.getElementById('box'+i+1).style.backgroundColor='#FFFFFF';
-        document.getElementById('box'+i+1).style.innerHTML="";
+    for(let i=1;i<5;i++){
+        document.getElementById('box'+i).style.backgroundColor="white";
+        document.getElementById('box'+i).innerHTML="";
+        document.getElementById('userInput').value="";
         
     }
     GenerateNumber();
