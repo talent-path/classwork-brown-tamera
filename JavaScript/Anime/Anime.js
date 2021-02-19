@@ -3,26 +3,32 @@ const getMangas=function(){
     $.get(
         "https://api.jikan.moe/v3/search/manga?order_by=title&limit=10",
         function(data, testState,jqXHR ){
-           
-            $("#Manga1").text(`${data.results[0].title}`)
-            $('#icon1').attr('src',`${data.results[0].image_url}`);
-            $('#Manga1Desc').text(`${data.results[0].synopsis}`);
-
-            $("#Manga2").text(`${data.results[1].title}`)
-            $('#icon2').attr('src',`${data.results[1].image_url}`);
-            $('#Manga2Desc').text(`${data.results[1].synopsis}`);
-
-            $("#Manga3").text(`${data.results[2].title}`)
-            $('#icon3').attr('src',`${data.results[2].image_url}`);
-            $('#Manga3Desc').text(`${data.results[2].synopsis}`);
-
-            $("#Manga4").text(`${data.results[3].title}`)
-            $('#icon4').attr('src',`${data.results[3].image_url}`);
-            $('#Manga4Desc').text(`${data.results[3].synopsis}`);
 
             console.log(data);
             console.log(testState);
             console.log(jqXHR);
+
+            let allbodyTags=document.getElementsByTagName('body');
+            let bodyTag= allbodyTags[0];
+            let animeDivTag=document.createElement('div');
+            bodyTag.appendChild(animeDivTag);
+
+            for(let i=0;i<data.results.length;i++){
+                let animeHeader=document.createElement('h3');
+                animeHeader.id="Manga "+ data.results[i] + "header";
+                $('h3').text(`${data.results[i].title}`);
+                animeDivTag.appendChild(animeHeader);
+                let animeImg=document.createElement('img');
+                animeImg.id="Ma"
+                $('img').attr('src',`${data.results[i].image_url}`);
+                animeDivTag.appendChild(animeImg);
+                let animeDesc=document.createElement('article');
+                $('animeDesc').text(`${data.results[i].synopsis}`);
+                animeDivTag.appendChild(animeDesc);
+
+            }
+
+           
         }
     );
     
@@ -30,23 +36,26 @@ const getMangas=function(){
 
 const SearchManga=function(){
 
-const Genre=$('#Genre').val;
-
+const Genre=document.getElementById('Genre').value;
+console.log(Genre);
 
     
-    $.get(`https://api.jikan.moe/v3/search/manga?genre=${Genre}&genre_exclude=0`),
+    $.get(`https://api.jikan.moe/v3/search/manga?genre=${Genre}`,
     function(data,testState,jqXHR){
+        
+        for(let i=0;i<data.results.length;i++){
 
-        $("#Manga1").text(`${data.results[0].title}`)
-        $('#icon1').attr('src',`${data.results[0].image_url}`);
-        $('#Manga1Desc').text(`${data.results[0].synopsis}`);
-
+        $('h3').text(`${data.results[i].title}`)
+        $('img').attr('src',`${data.results[i].image_url}`);
+        $('article').text(`${data.results[i].synopsis}`);
+        }
             console.log(data);
             console.log(testState);
             console.log(jqXHR);
+    
     }
+    )
 
-    console.log("No Manga available");
-
+    
 }
 getMangas();
