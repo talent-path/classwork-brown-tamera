@@ -27,13 +27,19 @@
              
             </ul>
             <form class="d-flex">
-              <input class="form-control me-2" id="Genre" placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-success" onclick="SearchManga()" type="submit">Search</button>
+              <!-- <input class="form-control me-2" id="Genre" type="search" placeholder="Search" aria-label="Search"> -->
+              <select id="Genre">
+                  <option value="1">Action</option>
+                  <option value="2">Adventure</option>
+                  
+              </select>
+              <button class="btn btn-outline-success" onclick="SearchManga()">Search</button>
             </form>
           </div>
         </div>
       </nav>
       
+      <div>
      
         <h2 id="Manga1"></h2>
         <img id="icon1">
@@ -51,12 +57,6 @@
         <h2 id="Manga4"></h2>
         <img id="icon4">
         <article id="Manga4Desc"></article>
-
-
-        <h2 id="Manga7"></h2>
-        <img id="icon7">
-        <article id="Manga7Desc"></article>
-
 
 
 
