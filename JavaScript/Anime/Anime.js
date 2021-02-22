@@ -12,12 +12,12 @@ const getMangas=function(){
             let bodyTag= allbodyTags[0];
             let animeDivTag=document.createElement('div');
             bodyTag.appendChild(animeDivTag);
-            let card= document.createElement('div');
-            card.className="card";
-            animeDivTag.appendChild(card);
+           
 
             for(let i=0;i<data.results.length;i++){
-               
+                let card= document.createElement('div');
+                card.className="card";
+                animeDivTag.appendChild(card);
                 let animeHeader=document.createElement('h4');
                 animeHeader.id="Manga "+ i + " header";
                 animeHeader.className="card-title";
@@ -28,7 +28,7 @@ const getMangas=function(){
                 animeImg.className="card-img";
                 animeImg.setAttribute("src",`${data.results[i].image_url}`);
 
-                animeImg.style.width="20%";
+                animeImg.style.width="45%";
                 card.appendChild(animeImg);
                 let animeDesc=document.createElement('article');
                 animeDesc.id="Manga " + i + " description";
@@ -36,7 +36,10 @@ const getMangas=function(){
                 animeDesc.innerHTML=`${data.results[i].synopsis}`;
                 card.appendChild(animeDesc);
 
+               
+
             }
+            
             
            
         }
