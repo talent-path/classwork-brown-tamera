@@ -14,14 +14,14 @@ export interface Board{
 
     allSquares : Piece[][];
 
-    // isWhiteTurn : boolean;
+    isWhiteTurn : boolean;
     // wKingSideCastle : boolean;
     // wQueenSideCastle: boolean;
     // bKingSideCastle : boolean;
     // bQueenSideCastle: boolean;
 
-    fiftyMoveCount : number;
-    enPassantCaptureLoc : Position;
+    // fiftyMoveCount : number;
+    // enPassantCaptureLoc : Position;
 
     makeMove : (this: Board, toMake : Move) => Board;
     pieceAt : ( loc: Position ) => Piece;
@@ -32,10 +32,11 @@ export interface Board{
 export class ChessBoard implements Board{
 
     //TODO: capture this in the copy constructor at some point...
-    fiftyMoveCount : number;
-    enPassantCaptureLoc : Position;
+    // fiftyMoveCount : number;
+    // enPassantCaptureLoc : Position;
 
     allSquares : Piece[][];
+    isWhiteTurn : boolean = true; 
 
     //  rnbqkbnr        7
     //  pppppppp        6
@@ -58,20 +59,16 @@ export class ChessBoard implements Board{
         if( copyFrom ){
             this.buildFrom( copyFrom );
         }
+        else{
         this.allSquares = [];
         for( let row = 0; row < 8; row++ ){
             this.allSquares[row] = [];
             for( let col = 0; col < 8; col++ ){
-                // if( row === 6 ){
-                //     this.allSquares[row][col] = {kind: PieceType.Pawn, isWhite: false};
-                // }
-                // if( row === 1 ){
-                //     this.allSquares[row][col] = {kind: PieceType.Pawn, isWhite: true};
-                // }
+                
 
-                if( row === 1 || row === 6 ){
-                    this.allSquares[row][col] =  row === 1 ? new WhitePawn() : new BlackPawn();
-                }
+                // if( row === 1 || row === 6 ){
+                //     this.allSquares[row][col] =  row === 1 ? new WhitePawn() : new BlackPawn();
+                // }
 
                 if( (row === 0 || row === 7) && (col === 0 || col === 7 )){
                     this.allSquares[row][col] = new Rook( row === 0 );
@@ -101,6 +98,7 @@ export class ChessBoard implements Board{
             }
         }
     }
+}
 
     buildFrom( toCopy : Board ) {
 
@@ -126,6 +124,7 @@ export class ChessBoard implements Board{
 
         nextBoard.allSquares[toMake.from.row][toMake.from.col] = null;
         nextBoard.allSquares[toMake.to.row][toMake.to.col] = oldPiece;
+        nextBoard.isWhiteTurn = !this.isWhiteTurn; 
 
 
 
@@ -149,10 +148,10 @@ export class ChessBoard implements Board{
 
 }
 
-console.log( "attempting to create a board")
-let testBoard : Board = new ChessBoard();
+// console.log( "attempting to create a board")
+// let testBoard : Board = new ChessBoard();
 // console.log( "done creating a board:");
-//console.log( testBoard );
+// //console.log( testBoard );
 
-testBoard = testBoard.makeMove( { from: {row: 1, col: 3}, to: {row: 3, col: 3} } );
+// testBoard = testBoard.makeMove( { from: {row: 1, col: 3}, to: {row: 3, col: 3} } );
 // console.log( testBoard.generateMoves() );

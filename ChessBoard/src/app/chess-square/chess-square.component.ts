@@ -1,43 +1,60 @@
+import { sequence } from '@angular/animations';
 import { Component, Input, OnInit } from '@angular/core';
 import { Bishop } from '../Chess/Pieces/Bishop';
 import { Piece, PieceType } from '../Chess/Pieces/Piece';
+import {Output, EventEmitter} from '@angular/core';
+import { Position } from '../Chess/Position';
 
 @Component({
   selector: 'chess-square',
   templateUrl: './chess-square.component.html',
   styleUrls: ['./chess-square.component.css']
 })
-export class ChessSquareComponent implements OnInit {
-  @Input()squarePiece:Piece=new Bishop(true);
-  imagesrc:string="./assets/";
-  @Input()row:number=0;
-  @Input()col:number=0;
-  islightSquare:boolean;
 
-  constructor() { }
+
+export class ChessSquareComponent implements OnInit {
+
+  @Output() squareClickedEvent : EventEmitter<Position> = new EventEmitter<Position>(); 
+
+  @Input()squarePiece: Piece = new Bishop(true);
+  imageSrc: string = "./assets/";
+  @Input()row : number = 0; 
+  @Input() col : number = 7; 
+  isLightSquare : boolean = true; 
+
+  constructor() {
+
+  }
 
   ngOnInit(): void {
-    if(this.squarePiece==null){
-      this.imagesrc="";
+    if(this.squarePiece == null){
+      this.imageSrc = " "; 
     }
-    else{
+    else {
 
-    this.imagesrc+=this.squarePiece.isWhite ? 'w': 'b';
-    switch(this.squarePiece.kind){
-        case PieceType.Bishop: this.imagesrc+='B'; break;
-        case PieceType.King: this.imagesrc+='K'; break;
-        case PieceType.Knight:this.imagesrc+='N'; break;
-        case PieceType.Pawn:this.imagesrc+='P'; break;
-        case PieceType.Queen:this.imagesrc+='Q'; break;
-        case PieceType.Rook: this.imagesrc+='R'; break;
+    
+    this.imageSrc += this.squarePiece.isWhite ? "w" : "b";
+    switch (this.squarePiece.kind) {
+      case PieceType.Bishop: this.imageSrc += "B"; break;
+      case PieceType.Knight: this.imageSrc += "N"; break;
+      case PieceType.King: this.imageSrc += "K"; break;
+      case PieceType.Queen: this.imageSrc += "Q"; break;
+      case PieceType.Pawn: this.imageSrc += "P"; break;
+      case PieceType.Rook: this.imageSrc += "R"; break;
+
     }
-    this.imagesrc+='.png';
 
-      
+    this.imageSrc += ".png"; 
+  } 
+    this.isLightSquare =(this.row + this.col) %2 === 0; 
+   
   }
-  this.islightSquare=((this.row + this.col) % 2 ===0);
-  
+
+  squareClicked() : void{
+    this.squareClickedEvent.emit(
+      {
+        row : this.row, col : this.col}
+      )
+  }
+
 }
-  }
-
-
