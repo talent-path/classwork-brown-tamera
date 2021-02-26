@@ -1,0 +1,13 @@
+<h1>Tic Tac Toe</h1>
+<button mat-raised-button color="accent" (click)="StartGame()">Reset Game</button>
+<h2>Current Player: {{player}}</h2>
+<h2 *ngIf="winner">
+    Player {{winner}} won the game
+</h2>
+
+<main>
+ <tictactoe-square *ngFor="let val of squares; let i=index"
+  [value]=val (click)="makeMove(i)">
+
+ </tictactoe-square>
+</main>

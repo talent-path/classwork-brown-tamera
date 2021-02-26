@@ -1,0 +1,13 @@
+h1,h2{
+    text-align: center;
+}
+tictactoe-square{
+    bottom: 1px grey solid;
+    height: 200px;
+}
+
+main{
+    display: grid;
+    grid-template-columns: 200px 200px 200px;
+    text-align: center;
+}
