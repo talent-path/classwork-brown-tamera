@@ -10,4 +10,9 @@ main{
     display: grid;
     grid-template-columns: 200px 200px 200px;
     text-align: center;
+    justify-content: center;
+}
+div{
+   
+    margin-left: 120px;
 }

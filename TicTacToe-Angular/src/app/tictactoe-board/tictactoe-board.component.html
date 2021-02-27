@@ -1,5 +1,7 @@
 <h1>Tic Tac Toe</h1>
-<button mat-raised-button color="accent" (click)="StartGame()">Reset Game</button>
+<div>
+    <button mat-raised-button color="accent" (click)="StartGame()">Reset Game</button>
+</div>
 <h2>Current Player: {{player}}</h2>
 <h2 *ngIf="winner">
     Player {{winner}} won the game
