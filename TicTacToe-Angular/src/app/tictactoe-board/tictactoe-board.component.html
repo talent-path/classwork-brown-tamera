@@ -4,6 +4,9 @@
 <h2 *ngIf="winner">
     Player {{winner}} won the game
 </h2>
+<h2 *ngIf="draw">
+    {{draw}}
+</h2>
 
 <main>
  <tictactoe-square *ngFor="let val of squares; let i=index"

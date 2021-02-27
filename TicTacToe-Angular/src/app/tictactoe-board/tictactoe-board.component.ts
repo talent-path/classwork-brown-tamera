@@ -10,7 +10,7 @@ export class TictactoeBoardComponent implements OnInit {
  squares:string[];
  winner:string;
  Turn:boolean;
- draw:boolean;
+ draw:string;
 
 
 
@@ -24,7 +24,7 @@ StartGame():void{
   this.squares=Array(9).fill(null);
   this.winner=null;
   this.Turn=true;
-  
+  this.draw=null;
   
  
 }
@@ -36,11 +36,11 @@ if(!this.squares[pos]){
 this.squares.splice(pos,1,this.player);
 this.Turn=!this.Turn;
 }
-this.winner=this.IsWinner();
-
+this.winner=this.Won();
+this.draw=this.Draw();
 
 }
-IsWinner(): string{
+Won(): string{
   const possibleWinLocations=
   [
     [0,1,2],
@@ -61,5 +61,11 @@ IsWinner(): string{
       
     }
  return null;
+}
+Draw(): string{
+  if((!this.squares.includes(null) && this.winner==null)){
+    return 'Draw';
+  }
+  return null;
 }
 }
