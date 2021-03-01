@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.*;
 import java.util.stream.Collectors;
 
-//@Repository
+@Repository
 public class LibraryInMemDAO implements LibraryDAO{
 
     private List<Book> allBooks = new ArrayList<>();

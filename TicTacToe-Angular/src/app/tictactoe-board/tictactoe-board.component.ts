@@ -11,20 +11,36 @@ export class TictactoeBoardComponent implements OnInit {
  winner:string;
  Turn:boolean;
  draw:string;
+//  RoundNum:number;
+//  numWins:number;
+//   numLoss:number;
+ 
 
 
 
 constructor() { }
 
    ngOnInit(): void {
+    // this.RoundNum=this.NumOfRounds();
    this.StartGame();
    }
+
+//    NumOfRounds(): number {
+//        let rounds=parseInt(prompt("How many rounds would you like to play?"));
+//   while(rounds<= 0 || isNaN(rounds)) {
+//   alert("You have to play at least 1 round!");
+//    rounds=parseInt(prompt("How many rounds would you like to play?"));
+//   }
+//    return rounds;
+//  }
 
 StartGame():void{
   this.squares=Array(9).fill(null);
   this.winner=null;
   this.Turn=true;
   this.draw=null;
+  // this.numWins=0;
+  // this.numLoss=0;
   
  
 }

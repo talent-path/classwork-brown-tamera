@@ -3,6 +3,8 @@
     <button mat-raised-button color="accent" (click)="StartGame()">Reset Game</button>
 </div>
 <h2>Current Player: {{player}}</h2>
+<!-- <h2>Wins: {{numWins}}</h2>
+<h2>Loss: {{numLoss}}</h2> -->
 <h2 *ngIf="winner">
     Player {{winner}} won the game
 </h2>
